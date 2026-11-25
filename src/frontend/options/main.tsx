@@ -502,10 +502,11 @@ function App() {
             {s.rootFolder && <span className="badge-ok">✓ Done</span>}
           </div>
           <label>
-            Root folder
+            Root folder (optional)
             <input
               value={s.rootFolder}
               onChange={(e) => set('rootFolder', e.target.value)}
+              placeholder="Repository root (default) — or enter subfolder"
             />
           </label>
           <div
