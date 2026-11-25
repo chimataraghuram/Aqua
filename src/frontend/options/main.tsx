@@ -114,6 +114,37 @@ function App() {
         Connect with Token
       </button>
 
+      <button
+        type="button"
+        className="secondary"
+        onClick={async () => {
+          setError('');
+          setNotice('');
+          if (!s.repository) {
+            setError('Select or create a repository first.');
+            return;
+          }
+          const b = await msg({ type: 'GET_BRANCHES', repository: s.repository });
+          if (b?.error) setError(b.error);
+          else setNotice(`Connection OK: ${s.repository} (${s.branch || 'main'}).`);
+        }}
+      >
+        Test connection
+      </button>
+      <button
+        type="button"
+        className="secondary"
+        onClick={async () => {
+          setError('');
+          await msg({ type: 'DISCONNECT_GITHUB' });
+          setRepos([]);
+          setBranches([]);
+          setNotice('Disconnected from GitHub.');
+        }}
+      >
+        Disconnect GitHub
+      </button>
+
       <label>
         OAuth client ID (optional, for Device Flow)
         <input
