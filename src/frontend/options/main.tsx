@@ -233,9 +233,25 @@ function App() {
             </button>
           </details>
 
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              margin: '12px 0',
+              color: '#64748b',
+              fontSize: '12px',
+              fontWeight: 600,
+            }}
+          >
+            <hr style={{ flex: 1, margin: 0 }} />
+            <span>OR</span>
+            <hr style={{ flex: 1, margin: 0 }} />
+          </div>
+
           <details open>
             <summary style={{ cursor: 'pointer', fontWeight: 600, margin: '8px 0' }}>
-              Or use existing repository
+              Use existing repository
             </summary>
             <label>
               Repository
