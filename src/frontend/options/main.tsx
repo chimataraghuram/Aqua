@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react';
 const msg = (x: unknown) =>
   new Promise<any>((r) => chrome.runtime.sendMessage(x, r));
 
-const PLATFORMS: Array<{ id: Platform; label: string }> = [
-  { id: 'leetcode', label: 'LeetCode' },
-  { id: 'geeksforgeeks', label: 'GeeksforGeeks' },
-  { id: 'codechef', label: 'CodeChef' },
-  { id: 'hackerrank', label: 'HackerRank' },
+const PLATFORMS: Array<{ id: Platform; label: string; color: string; tag: string }> = [
+  { id: 'leetcode', label: 'LeetCode', color: '#f59e0b', tag: 'LC' },
+  { id: 'geeksforgeeks', label: 'GeeksforGeeks', color: '#16a34a', tag: 'GG' },
+  { id: 'codechef', label: 'CodeChef', color: '#92400e', tag: '</>' },
+  { id: 'hackerrank', label: 'HackerRank', color: '#10b981', tag: 'H' },
 ];
 
 function App() {
@@ -324,13 +324,32 @@ function App() {
             Platforms &amp; Sync
           </h2>
           {PLATFORMS.map((p) => (
-            <label key={p.id}>
+            <label
+              key={p.id}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            >
               <input
                 type="checkbox"
                 checked={s.enabledPlatforms?.[p.id] ?? true}
                 onChange={(e) => togglePlatform(p.id, e.target.checked)}
-              />{' '}
-              {p.label}
+              />
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '22px',
+                  height: '22px',
+                  borderRadius: '6px',
+                  background: p.color,
+                  color: '#ffffff',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                }}
+              >
+                {p.tag}
+              </span>
+              <span>{p.label}</span>
             </label>
           ))}
           <hr />
@@ -420,14 +439,19 @@ function App() {
       </div>
 
       <footer className="dev-footer">
-        <div>
-          <strong style={{ color: '#0f172a' }}>Developed by TechBoy</strong>
-          <div style={{ fontSize: '12px', color: '#64748b' }}>
-            Build. Learn. Grow. · CHIMATA RAGHURAM
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <img src="/icon.svg" alt="TechBoy" width={28} height={28} />
+          <div>
+            <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '13px' }}>
+              Developed by TechBoy
+            </div>
+            <div style={{ fontSize: '11px', color: '#64748b' }}>
+              Build. Learn. Grow.
+            </div>
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <a
             className="repo-link"
             style={{ margin: 0 }}
@@ -435,11 +459,20 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-            ★ Star on GitHub
+            GitHub Repository
           </a>
           <a
-            className="repo-link"
-            style={{ margin: 0 }}
+            className="badge-ok"
+            style={{ textDecoration: 'none', background: '#e2e8f0', color: '#0f172a' }}
+            href="https://github.com/chimataraghuram/Aqua"
+            target="_blank"
+            rel="noreferrer"
+          >
+            ★ Star
+          </a>
+          <a
+            className="badge-ok"
+            style={{ textDecoration: 'none', background: '#dbeafe', color: '#1d4ed8' }}
             href="https://github.com/chimataraghuram/Aqua/pulls"
             target="_blank"
             rel="noreferrer"
@@ -449,34 +482,41 @@ function App() {
         </div>
 
         <div>
-          <strong style={{ color: '#0f172a', fontSize: '12px' }}>Contact &amp; Links</strong>
-          <div style={{ display: 'flex', gap: '12px', fontSize: '12px' }}>
-            <a
-              className="repo-link"
-              style={{ margin: 0 }}
-              href="mailto:chimataraghuram@gmail.com"
-            >
-              Email
-            </a>
-            <a
-              className="repo-link"
-              style={{ margin: 0 }}
-              href="https://github.com/chimataraghuram"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
-            <a
-              className="repo-link"
-              style={{ margin: 0 }}
-              href="https://www.linkedin.com/in/chimataraghuram"
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
+          <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '12px' }}>
+            Contact Me
           </div>
+          <a
+            className="repo-link"
+            style={{ margin: 0, fontSize: '12px' }}
+            href="mailto:chimataraghuram@gmail.com"
+          >
+            chimataraghuram@gmail.com
+          </a>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <a
+            href="https://github.com/chimataraghuram"
+            target="_blank"
+            rel="noreferrer"
+            title="GitHub"
+            style={{ color: '#0f172a' }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/chimataraghuram"
+            target="_blank"
+            rel="noreferrer"
+            title="LinkedIn"
+            style={{ color: '#0a66c2' }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>
+          </a>
         </div>
       </footer>
     </main>
