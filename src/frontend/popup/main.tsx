@@ -23,6 +23,28 @@ const isCodingUrl = (url?: string): boolean => {
   }
 };
 
+const dayKey = (ts: number): string => {
+  const d = new Date(ts);
+  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+};
+
+const computeStreak = (records: SyncRecord[]): number => {
+  const days = new Set(
+    records.filter((r) => r.status === 'success').map((r) => dayKey(r.timestamp))
+  );
+  if (days.size === 0) return 0;
+  let streak = 0;
+  const cursor = new Date();
+  if (!days.has(dayKey(cursor.getTime()))) {
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  while (days.has(dayKey(cursor.getTime()))) {
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+};
+
 function App() {
   const [data, setData] = useState<any>();
   const [onCodingSite, setOnCodingSite] = useState<boolean>(true);
@@ -110,13 +132,19 @@ function App() {
 
   const history = (data.history || []) as SyncRecord[];
   const solved = new Map<string, SyncRecord>();
+  const todaySolved = new Set<string>();
+  const today = dayKey(Date.now());
+
   for (const rec of history) {
     if (rec.status === 'success') {
       const key = `${rec.submission.platform || 'leetcode'}:${rec.submission.slug}`;
       if (!solved.has(key)) solved.set(key, rec);
+      if (dayKey(rec.timestamp) === today) todaySolved.add(key);
     }
   }
+
   const solvedList = Array.from(solved.values());
+  const streak = computeStreak(history);
   const countDiff = (d: string) =>
     solvedList.filter((r) =>
       (r.submission.difficulty || '').toLowerCase().includes(d)
@@ -129,27 +157,50 @@ function App() {
 
   return (
     <main>
-      <h1 className="brand">
+      <img
+        src="/icon.svg"
+        alt="Aqua"
+        width={40}
+        height={40}
+        style={{ marginBottom: '4px' }}
+      />
+      <h1 className="brand" style={{ fontSize: '20px', marginBottom: '2px' }}>
         <span>Aqua</span>
       </h1>
-      <p className="subtitle">Sync your code from coding platforms to GitHub</p>
+      <p className="subtitle" style={{ fontSize: '12px', marginBottom: '8px' }}>
+        Code More. Manage Less. ⚡
+      </p>
 
       {data.auth ? (
         <>
-          {repo ? (
-            <a
-              className="repo-link"
-              href={`https://github.com/${repo}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {repo}
-            </a>
-          ) : (
-            <p className="subtitle">No repository selected</p>
-          )}
+          <div className="streak-pill">
+            <span className="streak-fire">🔥</span>
+            <span>{streak} Day Streak</span>
+          </div>
+
+          <div>
+            {repo ? (
+              <a
+                className="repo-link"
+                href={`https://github.com/${repo}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {repo}
+              </a>
+            ) : (
+              <p className="subtitle">No repository selected</p>
+            )}
+          </div>
+
           <hr />
-          <p className="solved-total">Problems Solved: {solvedList.length}</p>
+          <p className="solved-total" style={{ marginBottom: '4px' }}>
+            Total Solved: {solvedList.length}
+          </p>
+          <p className="subtitle" style={{ marginBottom: '10px', fontSize: '12px' }}>
+            Solved Today: <strong>{todaySolved.size}</strong>
+          </p>
+
           <div className="diff-row">
             <div className="diff-easy">
               Easy: <span>{countDiff('easy')}</span>
@@ -161,7 +212,7 @@ function App() {
               Hard: <span>{countDiff('hard')}</span>
             </div>
           </div>
-          <p className="subtitle">
+          <p className="subtitle" style={{ marginBottom: '12px' }}>
             LC: {countPlat('leetcode')} · GfG: {countPlat('geeksforgeeks')} ·
             CC: {countPlat('codechef')} · HR: {countPlat('hackerrank')}
           </p>

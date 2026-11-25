@@ -325,6 +325,43 @@ select {
   font-weight: 600;
 }
 
+@keyframes fireFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(-2deg);
+    filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.75));
+  }
+  50% {
+    transform: scale(1.12) rotate(2deg);
+    filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.95));
+  }
+}
+
+.streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  margin: 6px 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 237, 213, 0.9);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  color: #c2410c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.streak-fire {
+  display: inline-block;
+  font-size: 17px;
+  animation: fireFlicker 1.1s ease-in-out infinite;
+}
+
+body.dark .streak-pill {
+  background: rgba(124, 45, 18, 0.45);
+  border-color: rgba(251, 146, 60, 0.4);
+  color: #fdba74;
+}
+
 body.dark {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e1b4b 100%);
   color: #f1f5f9;
