@@ -87,7 +87,7 @@ function App() {
       <header className="options-topbar">
         <div className="topbar-left">
           <h1 className="brand">
-            Aqua<span>Hub</span>
+            <span>Aqua</span>
           </h1>
           <p className="subtitle">by TechBoy · Solve. Flow. Sync.</p>
         </div>

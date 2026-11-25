@@ -39,7 +39,7 @@ function App() {
   return (
     <main>
       <h1 className="brand">
-        Aqua<span>Hub</span>
+        <span>Aqua</span>
       </h1>
       <p className="subtitle">Sync your code from coding platforms to GitHub</p>
 
