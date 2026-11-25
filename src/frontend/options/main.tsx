@@ -48,7 +48,12 @@ function App() {
   if (!s) return <main>Loading…</main>;
 
   const set = <K extends keyof Settings>(k: K, v: Settings[K]) =>
-    setS((prev) => (prev ? { ...prev, [k]: v } : prev));
+    setS((prev) => {
+      if (!prev) return prev;
+      const next = { ...prev, [k]: v };
+      msg({ type: 'SAVE_SETTINGS', settings: next });
+      return next;
+    });
 
   const togglePlatform = (p: Platform, enabled: boolean) =>
     set('enabledPlatforms', { ...s.enabledPlatforms, [p]: enabled });
@@ -345,8 +350,14 @@ function App() {
                     const b = await msg({ type: 'GET_BRANCHES', repository: repo });
                     if (Array.isArray(b)) {
                       const names = b.map((x: any) => x.name);
+                      const nextBranch = names[0] || 'main';
                       setBranches(names);
-                      set('branch', names[0] || 'main');
+                      set('branch', nextBranch);
+                      await msg({
+                        type: 'SAVE_SETTINGS',
+                        settings: { ...s, repository: repo, branch: nextBranch },
+                      });
+                      setNotice(`Selected ${repo} and updated README & platform folders.`);
                     }
                   } else {
                     setBranches([]);
@@ -514,7 +525,7 @@ function App() {
             <div>✓ Problem ID included in folder name</div>
             <div>✓ Auto-generated README.md per problem</div>
             <div style={{ marginTop: '6px', color: '#475569', fontFamily: 'monospace' }}>
-              {s.rootFolder || 'Coding-Solutions'}/LeetCode/0001-two-sum/solution.py
+              {s.rootFolder ? `${s.rootFolder}/` : ''}LeetCode/0001-two-sum/solution.py
             </div>
           </div>
           <label>
