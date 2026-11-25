@@ -16,12 +16,80 @@ main {
 }
 
 main.options {
-  width: 520px;
-  margin: 24px auto;
+  width: 100%;
+  max-width: 1040px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 28px 32px 48px;
   text-align: left;
+}
+
+.options-topbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 24px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.options-brand {
+  text-align: center;
+}
+
+.options-brand .brand {
+  font-size: 30px;
+  margin: 0 0 4px;
+}
+
+.options-brand .subtitle {
+  margin: 0;
+}
+
+.logout-btn {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.logout-btn:hover {
+  background: #fecaca;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.card {
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.options-footer {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .brand {
@@ -108,6 +176,7 @@ button {
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, background-color 0.14s ease, opacity 0.14s ease;
 }
 
 button.secondary {
@@ -116,7 +185,18 @@ button.secondary {
 }
 
 button:hover {
-  opacity: 0.92;
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.22);
+}
+
+button.secondary:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
 }
 
 label {
