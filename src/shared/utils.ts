@@ -111,11 +111,22 @@ export const repoReadme = (
     })
     .join('\n');
 
-  return `# 🧠 Coding Solutions & Algorithms
+  return `<div align="center">
 
-Maintained by **@${login}**
+# 🧠 Coding Solutions & Algorithms
 
-A centralized, multi-platform repository for Data Structures & Algorithms solutions across **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**.
+**Maintained by [@${login}](https://github.com/${login}) · Auto-Synced by [Aqua](https://github.com/chimataraghuram/Aqua)**
+
+<p>
+  <img src="https://img.shields.io/badge/Total%20Solved-${total}-0284c7?style=flat-square" alt="Total Solved" />
+  <img src="https://img.shields.io/badge/Easy-${easy}-16a34a?style=flat-square" alt="Easy" />
+  <img src="https://img.shields.io/badge/Medium-${medium}-d97706?style=flat-square" alt="Medium" />
+  <img src="https://img.shields.io/badge/Hard-${hard}-dc2626?style=flat-square" alt="Hard" />
+</p>
+
+> 🚀 A centralized, multi-platform repository for Data Structures & Algorithms solutions across **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**.
+
+</div>
 
 ## 🌐 Platforms & Structure
 
