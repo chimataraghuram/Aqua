@@ -86,9 +86,11 @@ function App() {
     <main className="options">
       <header className="options-topbar">
         <div className="topbar-left">
+          <img src="/icon.svg" alt="Aqua" width={26} height={26} />
           <h1 className="brand">
             <span>Aqua</span>
           </h1>
+          <span style={{ color: '#cbd5e1' }}>|</span>
           <p className="subtitle">by TechBoy · Solve. Flow. Sync.</p>
         </div>
         <button
@@ -108,16 +110,35 @@ function App() {
 
       <div className="stepper">
         <div className="step">
-          <span className="step-num">1</span> Connect
+          <span className="step-num">1</span>
+          <div>
+            <strong>Connect</strong>
+            <small>Link your account</small>
+          </div>
         </div>
+        <div className="step-line" />
         <div className="step">
-          <span className="step-num">2</span> Configure
+          <span className="step-num">2</span>
+          <div>
+            <strong>Configure</strong>
+            <small>Set your preferences</small>
+          </div>
         </div>
+        <div className="step-line" />
         <div className="step">
-          <span className="step-num">3</span> Organize
+          <span className="step-num">3</span>
+          <div>
+            <strong>Organize</strong>
+            <small>Manage files</small>
+          </div>
         </div>
+        <div className="step-line" />
         <div className="step">
-          <span className="step-num">4</span> Done
+          <span className="step-num">4</span>
+          <div>
+            <strong>Done</strong>
+            <small>You&apos;re all set!</small>
+          </div>
         </div>
       </div>
 
@@ -218,8 +239,8 @@ function App() {
             />{' '}
             Add README automatically
           </label>
-          <button type="button" onClick={handleCreateRepo}>
-            Create &amp; select repository
+          <button type="button" className="btn-full" onClick={handleCreateRepo}>
+            + Create &amp; select repository
           </button>
 
           <label>
