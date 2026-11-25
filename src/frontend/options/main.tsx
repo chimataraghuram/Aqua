@@ -85,13 +85,11 @@ function App() {
   return (
     <main className="options">
       <header className="options-topbar">
-        <div className="options-brand">
+        <div className="topbar-left">
           <h1 className="brand">
             Aqua<span>Hub</span>
           </h1>
-          <p className="subtitle">
-            by TechBoy · Solve. Flow. Sync. across LeetCode, GeeksforGeeks, CodeChef &amp; HackerRank
-          </p>
+          <p className="subtitle">by TechBoy · Solve. Flow. Sync.</p>
         </div>
         <button
           type="button"
@@ -108,9 +106,34 @@ function App() {
         </button>
       </header>
 
+      <div className="stepper">
+        <div className="step">
+          <span className="step-num">1</span> Connect
+        </div>
+        <div className="step">
+          <span className="step-num">2</span> Configure
+        </div>
+        <div className="step">
+          <span className="step-num">3</span> Organize
+        </div>
+        <div className="step">
+          <span className="step-num">4</span> Done
+        </div>
+      </div>
+
+      <div className="hero-title">
+        <h1 className="brand">
+          Aqua<span>Hub</span>
+        </h1>
+        <p className="subtitle">Connect · Manage · Build</p>
+      </div>
+
       <div className="options-grid">
         <section className="card">
-          <h2>GitHub Connection</h2>
+          <div className="card-head">
+            <h2>GitHub Connection</h2>
+            {repos.length > 0 && <span className="badge-ok">● Connected</span>}
+          </div>
           <label>
             Personal Access Token (quick connect)
             <input
@@ -337,11 +360,25 @@ function App() {
             setNotice('Settings saved.');
           }}
         >
-          Save settings
+          ✓ Save All Changes
         </button>
         {notice && <p className="ok">{notice}</p>}
         {error && <p className="bad">{error}</p>}
       </div>
+
+      <footer className="dev-footer">
+        <span>
+          Developed by <strong>TechBoy (CHIMATA RAGHURAM)</strong> · Build. Learn. Grow.
+        </span>
+        <a
+          className="repo-link"
+          href="https://github.com/chimataraghuram/Aqua"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub Repository
+        </a>
+      </footer>
     </main>
   );
 }
