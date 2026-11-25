@@ -78,4 +78,4 @@ export const commitMessage = (t: string, s: Submission) =>
     .replaceAll('{platform}', platformLabel(s.platform).toLowerCase());
 
 export const repoReadme = (login: string, repo: string) =>
-  `# 🧠 Coding Solutions & Algorithms\n\nMaintained by **@${login}**\n\nA centralized, multi-platform repository for Data Structures & Algorithms solutions across **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**.\n\n---\n\n*Auto-synced via **AquaHub** by TechBoy (CHIMATA RAGHURAM) · \`${repo}\`*\n`;
+  `# 🧠 Coding Solutions & Algorithms\n\nMaintained by **@${login}**\n\nA centralized, multi-platform repository for Data Structures & Algorithms solutions across **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**.\n\n---\n\n*Auto-synced via **Aqua** by TechBoy (CHIMATA RAGHURAM) · \`${repo}\`*\n`;

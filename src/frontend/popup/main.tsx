@@ -31,12 +31,15 @@ function App() {
       (r.submission.difficulty || '').toLowerCase().includes(d)
     ).length;
 
+  const countPlat = (p: string) =>
+    solvedList.filter((r) => (r.submission.platform || 'leetcode') === p).length;
+
   const repo = data.settings?.repository as string | undefined;
 
   return (
     <main>
       <h1 className="brand">
-        Aqua<span>Hub</span>
+        <span>Aqua</span>
       </h1>
       <p className="subtitle">Sync your code from coding platforms to GitHub</p>
 
@@ -67,6 +70,10 @@ function App() {
               Hard: <span>{countDiff('hard')}</span>
             </div>
           </div>
+          <p className="subtitle">
+            LC: {countPlat('leetcode')} · GfG: {countPlat('geeksforgeeks')} ·
+            CC: {countPlat('codechef')} · HR: {countPlat('hackerrank')}
+          </p>
 
           {data.pending.length > 0 && (
             <div className="actions">
