@@ -259,27 +259,17 @@ function App() {
       ) : (
         <>
           <hr />
-          <p className="subtitle" style={{ fontSize: '12px', marginBottom: '10px', lineHeight: 1.5 }}>
-            Auto-sync accepted solutions from
-            <br />
-            <strong>LeetCode · GeeksforGeeks · CodeChef · HackerRank</strong>
+          <p className="subtitle" style={{ fontSize: '12px', fontWeight: 600, marginBottom: '8px' }}>
+            Solve. Flow. Sync. · Your solutions deserve to be saved, not manually organized.
           </p>
-          <div
-            style={{
-              fontSize: '12px',
-              textAlign: 'left',
-              padding: '10px 12px',
-              borderRadius: '10px',
-              background: 'rgba(239, 246, 255, 0.12)',
-              border: '1px solid rgba(148, 163, 184, 0.25)',
-              marginBottom: '14px',
-              lineHeight: 1.6,
-            }}
-          >
-            <div>1. Connect your GitHub account</div>
-            <div>2. Create or pick a repository</div>
-            <div>3. Solve &amp; auto-sync every AC!</div>
-          </div>
+          <p className="subtitle" style={{ fontSize: '11.5px', lineHeight: 1.5, marginBottom: '10px' }}>
+            Focus on solving problems while Aqua takes care of the busywork. Automatically sync your accepted solutions from{' '}
+            <strong>LeetCode, GeeksforGeeks, CodeChef, and HackerRank</strong> straight to{' '}
+            <strong>GitHub</strong> — neatly organized, securely stored, and always ready when you need them.
+          </p>
+          <p className="subtitle" style={{ fontSize: '11.5px', fontStyle: 'italic', marginBottom: '14px' }}>
+            Less manual work &amp; Time managing code. More time building, coding &amp; solving ⚡.
+          </p>
           <div className="actions">
             <button
               style={{ width: '100%' }}
