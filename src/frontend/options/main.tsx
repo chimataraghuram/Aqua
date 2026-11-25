@@ -20,7 +20,6 @@ function App() {
   const [pat, setPat] = useState('');
   const [newRepoName, setNewRepoName] = useState('');
   const [newRepoPrivate, setNewRepoPrivate] = useState(true);
-  const [newRepoReadme, setNewRepoReadme] = useState(true);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
 
@@ -61,7 +60,7 @@ function App() {
       type: 'CREATE_REPO',
       name,
       isPrivate: newRepoPrivate,
-      includeReadme: newRepoReadme,
+      includeReadme: true,
     });
     if (created?.error) {
       setError(created.error);
@@ -206,85 +205,88 @@ function App() {
 
         <section className="card">
           <h2>Repository</h2>
-          <label>
-            Create a new repository
-            <input
-              value={newRepoName}
-              onChange={(e) => setNewRepoName(e.target.value)}
-              placeholder="e.g. dsa-solutions"
-            />
-          </label>
-          <label>
-            Visibility
-            <select
-              value={newRepoPrivate ? 'private' : 'public'}
-              onChange={(e) => setNewRepoPrivate(e.target.value === 'private')}
-            >
-              <option value="private">Private</option>
-              <option value="public">Public</option>
-            </select>
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={newRepoReadme}
-              onChange={(e) => setNewRepoReadme(e.target.checked)}
-            />{' '}
-            Add README automatically
-          </label>
-          <button type="button" className="btn-full" onClick={handleCreateRepo}>
-            + Create &amp; select repository
-          </button>
 
-          <label>
-            Or use existing repository
-            <select
-              value={s.repository || ''}
-              onChange={async (e) => {
-                const repo = e.target.value;
-                set('repository', repo);
-                if (repo) {
-                  const b = await msg({ type: 'GET_BRANCHES', repository: repo });
-                  if (Array.isArray(b)) {
-                    const names = b.map((x: any) => x.name);
-                    setBranches(names);
-                    set('branch', names[0] || 'main');
-                  }
-                } else {
-                  setBranches([]);
-                }
-              }}
-            >
-              <option value="">Select repository</option>
-              {repos.map((r) => (
-                <option key={r.full_name} value={r.full_name}>
-                  {r.full_name} ({r.private ? 'private' : 'public'})
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            Branch
-            {branches.length > 0 ? (
+          <details open>
+            <summary style={{ cursor: 'pointer', fontWeight: 600, margin: '8px 0' }}>
+              Create a new repository
+            </summary>
+            <label>
+              Repository name
+              <input
+                value={newRepoName}
+                onChange={(e) => setNewRepoName(e.target.value)}
+                placeholder="e.g. dsa-solutions"
+              />
+            </label>
+            <label>
+              Visibility
               <select
-                value={s.branch || ''}
-                onChange={(e) => set('branch', e.target.value)}
+                value={newRepoPrivate ? 'private' : 'public'}
+                onChange={(e) => setNewRepoPrivate(e.target.value === 'private')}
               >
-                {branches.map((b) => (
-                  <option key={b} value={b}>
-                    {b}
+                <option value="private">Private</option>
+                <option value="public">Public</option>
+              </select>
+            </label>
+            <button type="button" className="btn-full" onClick={handleCreateRepo}>
+              + Create &amp; select repository
+            </button>
+          </details>
+
+          <details open>
+            <summary style={{ cursor: 'pointer', fontWeight: 600, margin: '8px 0' }}>
+              Or use existing repository
+            </summary>
+            <label>
+              Repository
+              <select
+                value={s.repository || ''}
+                onChange={async (e) => {
+                  const repo = e.target.value;
+                  set('repository', repo);
+                  if (repo) {
+                    const b = await msg({ type: 'GET_BRANCHES', repository: repo });
+                    if (Array.isArray(b)) {
+                      const names = b.map((x: any) => x.name);
+                      setBranches(names);
+                      set('branch', names[0] || 'main');
+                    }
+                  } else {
+                    setBranches([]);
+                  }
+                }}
+              >
+                <option value="">Select repository</option>
+                {repos.map((r) => (
+                  <option key={r.full_name} value={r.full_name}>
+                    {r.full_name} ({r.private ? 'private' : 'public'})
                   </option>
                 ))}
               </select>
-            ) : (
-              <input
-                value={s.branch || ''}
-                onChange={(e) => set('branch', e.target.value)}
-                placeholder="main"
-              />
-            )}
-          </label>
+            </label>
+
+            <label>
+              Branch
+              {branches.length > 0 ? (
+                <select
+                  value={s.branch || ''}
+                  onChange={(e) => set('branch', e.target.value)}
+                >
+                  {branches.map((b) => (
+                    <option key={b} value={b}>
+                      {b}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  value={s.branch || ''}
+                  onChange={(e) => set('branch', e.target.value)}
+                  placeholder="main"
+                />
+              )}
+            </label>
+          </details>
         </section>
 
         <section className="card">
