@@ -1,4 +1,4 @@
-import type { Platform, Settings, Submission } from './types';
+import type { Platform, Settings, Submission, SyncRecord } from './types';
 
 export const languageExtensions: Record<string, string> = {
   python: '.py',
@@ -77,5 +77,77 @@ export const commitMessage = (t: string, s: Submission) =>
     .replaceAll('{language}', s.language)
     .replaceAll('{platform}', platformLabel(s.platform).toLowerCase());
 
-export const repoReadme = (login: string, repo: string) =>
-  `# 🧠 Coding Solutions & Algorithms\n\nMaintained by **@${login}**\n\nA centralized, multi-platform repository for Data Structures & Algorithms solutions across **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**.\n\n---\n\n*Auto-synced via **Aqua** by TechBoy (CHIMATA RAGHURAM) · \`${repo}\`*\n`;
+export const repoReadme = (
+  login: string,
+  repo: string,
+  records: SyncRecord[] = []
+) => {
+  const unique = new Map<string, SyncRecord>();
+  for (const r of records) {
+    if (r.status === 'success') {
+      const k = `${r.submission.platform || 'leetcode'}:${r.submission.slug}`;
+      if (!unique.has(k)) unique.set(k, r);
+    }
+  }
+  const list = Array.from(unique.values());
+  const total = list.length;
+  const platCount = (p: Platform) =>
+    list.filter((r) => (r.submission.platform || 'leetcode') === p).length;
+  const diffCount = (d: string) =>
+    list.filter((r) =>
+      (r.submission.difficulty || '').toLowerCase().includes(d)
+    ).length;
+  const pct = (n: number) => (total ? `${((n / total) * 100).toFixed(1)}%` : '0.0%');
+  const easy = diffCount('easy');
+  const medium = diffCount('medium');
+  const hard = diffCount('hard');
+
+  const rows = list
+    .map((r, i) => {
+      const p = platformLabel(r.submission.platform);
+      const d = r.submission.difficulty || 'Unknown';
+      const sol = r.path ? `[Solution](${r.path})` : '-';
+      return `| ${i + 1} | [${r.submission.title}](${r.submission.url}) | ${p} | ${d} | ${r.submission.language} | ${sol} |`;
+    })
+    .join('\n');
+
+  return `# 🧠 Coding Solutions & Algorithms
+
+Maintained by **@${login}**
+
+A centralized, multi-platform repository for Data Structures & Algorithms solutions across **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**.
+
+## 🌐 Platforms & Structure
+
+| Platform | Solved | Status |
+| --- | ---: | --- |
+| LeetCode | ${platCount('leetcode')} | ${platCount('leetcode') > 0 ? '🟢 Active' : '🟡 Ready'} |
+| GeeksforGeeks | ${platCount('geeksforgeeks')} | ${platCount('geeksforgeeks') > 0 ? '🟢 Active' : '🟡 Ready'} |
+| CodeChef | ${platCount('codechef')} | ${platCount('codechef') > 0 ? '🟢 Active' : '🟡 Ready'} |
+| HackerRank | ${platCount('hackerrank')} | ${platCount('hackerrank') > 0 ? '🟢 Active' : '🟡 Ready'} |
+
+## 📊 Progress
+
+| Difficulty | Solved | Ratio |
+| --- | ---: | ---: |
+| 🟢 Easy | ${easy} | ${pct(easy)} |
+| 🟡 Medium | ${medium} | ${pct(medium)} |
+| 🔴 Hard | ${hard} | ${pct(hard)} |
+| 🏆 **Total** | **${total}** | **100%** |
+
+## 📚 Solved Problems Catalog
+
+<details>
+<summary>Click to view all ${total} solved problems</summary>
+
+| # | Problem | Platform | Difficulty | Language | Solution |
+| ---: | --- | --- | --- | --- | --- |
+${rows || '| - | No problems synced yet | - | - | - | - |'}
+
+</details>
+
+---
+
+*Auto-synced via **Aqua** by TechBoy (CHIMATA RAGHURAM) · \`${repo}\`*
+`;
+};
