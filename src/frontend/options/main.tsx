@@ -120,21 +120,23 @@ function App() {
           >
             {s.darkMode ? '☀️ Light' : '🌙 Dark'}
           </button>
-          <button
-            type="button"
-            className="logout-btn"
-            style={{ position: 'static' }}
-            onClick={async () => {
-              setError('');
-              await msg({ type: 'DISCONNECT_GITHUB' });
-              setAuthLogin('');
-              setRepos([]);
-              setBranches([]);
-              setNotice('Logged out from GitHub.');
-            }}
-          >
-            Logout
-          </button>
+          {authLogin && (
+            <button
+              type="button"
+              className="logout-btn"
+              style={{ position: 'static' }}
+              onClick={async () => {
+                setError('');
+                await msg({ type: 'DISCONNECT_GITHUB' });
+                setAuthLogin('');
+                setRepos([]);
+                setBranches([]);
+                setNotice('Logged out from GitHub.');
+              }}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </header>
 
