@@ -41,7 +41,8 @@ Most extensions only support a single coding site or clutter your browser with u
 > **Built by an Indian student developer.**  
 > **Aqua is a 100% secure extension — a student never wants your data.**
 
-- **Privacy Zone**: Automatically greys out and locks on non-coding websites—Aqua only activates on **LeetCode, GeeksforGeeks, CodeChef, and HackerRank** (Settings remain accessible anytime).
+- **Privacy Zone Protection**: On all non-coding websites (banking, social media, email, etc.), Aqua automatically enters **Privacy Zone**, greys out its interface with a lock icon, and stays completely inactive—it only activates on **LeetCode, GeeksforGeeks, CodeChef, and HackerRank** (Settings remain accessible anytime).
+- **Minimal Permissions**: Aqua only requests `storage`, `notifications`, `activeTab`, and host access strictly limited to the 4 supported coding platforms and GitHub—never `<all_urls>`.
 - **Zero Backend / Zero Tracking**: Aqua has no servers, no analytics, and no third-party trackers.
 - **Local-Only Storage**: Your GitHub token, settings, and sync history stay strictly inside your browser's local storage (`chrome.storage`).
 - **Direct to GitHub**: Your code goes directly from your browser to GitHub's official REST API—nowhere else.
