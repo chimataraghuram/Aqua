@@ -73,18 +73,36 @@ Contributions to this repository are warmly welcomed. However, **copying, rebran
 
 ## Developer
 
-**TechBoy (CHIMATA RAGHURAM)**  
-*An Indian student developer · Secure extension — a student never wants your data.*
+<div align="center">
 
-1. **LinkedIn**: [linkedin.com/in/chimataraghuram](https://www.linkedin.com/in/chimataraghuram)
-2. **GitHub**: [github.com/chimataraghuram](https://github.com/chimataraghuram)
-3. **Contact**: [chimataraghuram02a@gmail.com](mailto:chimataraghuram02a@gmail.com)
-4. **Sponsor**: [github.com/sponsors/chimataraghuram](https://github.com/sponsors/chimataraghuram)
+<img src="assets/developer.jpg" alt="CHIMATA RAGHURAM (TechBoy)" width="120" height="120" style="border-radius: 12px;" />
+
+### CHIMATA RAGHURAM (TECHBOY)
+
+*Indian Student Developer · Full-Stack Developer & AI Enthusiast*  
+*Secure extension — a student never wants your data.*
+
+<p>
+  <a href="https://www.linkedin.com/in/chimataraghuram/">
+    <img src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  <a href="https://github.com/chimataraghuram">
+    <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="mailto:chimataraghuram02a@gmail.com">
+    <img src="https://img.shields.io/badge/CONTACT-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Contact" />
+  </a>
+  <a href="https://github.com/sponsors/chimataraghuram">
+    <img src="https://img.shields.io/badge/SPONSOR-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="Sponsor" />
+  </a>
+</p>
+
+</div>
 
 ---
 
 <div align="center">
 
-**Cooked by Raghu**
+**COOKED BY RAGHU ❤️**
 
 </div>
