@@ -164,7 +164,9 @@ function App() {
               type="password"
               value={pat}
               onChange={(e) => setPat(e.target.value)}
-              placeholder="ghp_... (repo scope)"
+              placeholder={
+                authLogin ? '•••••••••••••••••••• (token saved)' : 'ghp_... (repo scope)'
+              }
             />
           </label>
           <div className="actions">
@@ -399,15 +401,21 @@ function App() {
               <span>{p.label}</span>
             </label>
           ))}
-          <hr />
-          <label>
-            <input
-              type="checkbox"
-              checked={s.autoSync}
-              onChange={(e) => set('autoSync', e.target.checked)}
-            />{' '}
-            Automatically sync accepted submissions
-          </label>
+          <div
+            style={{
+              margin: '12px 0',
+              padding: '10px 12px',
+              borderRadius: '10px',
+              background: 'rgba(239, 246, 255, 0.85)',
+              fontSize: '12px',
+              color: '#1e3a8a',
+            }}
+          >
+            <div style={{ fontWeight: 700, marginBottom: '4px' }}>
+              Handled automatically for you:
+            </div>
+            <div>✓ Automatically sync accepted submissions</div>
+          </div>
           <label>
             Duplicate behavior
             <select
