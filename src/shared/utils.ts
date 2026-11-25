@@ -117,8 +117,6 @@ export const repoReadme = (
 
 # 🧠 ${repoTitle}
 
----
-
 **Maintained by [Aqua](https://github.com/chimataraghuram/Aqua)** <img src="https://raw.githubusercontent.com/chimataraghuram/Aqua/main/public/icon.svg" alt="Aqua" width="20" height="20" align="absmiddle" />
 
 <p>
