@@ -2,24 +2,17 @@
 
 <img src="public/icon.svg" alt="Aqua Logo" width="84" height="84" />
 
-# Aqua
+# Aqua — Code More. Manage Less. ⚡
 
-**Solve. Flow. Sync.**  
-*A privacy-first, all-in-one browser extension that automatically syncs your accepted coding solutions from **LeetCode, GeeksforGeeks, CodeChef, and HackerRank** straight to **GitHub**.*
+**Solve. Flow. Sync.** · *Your solutions deserve to be saved, not manually organized.*
+
+Focus on solving problems while Aqua takes care of the busywork. Automatically sync your accepted solutions from **LeetCode, GeeksforGeeks, CodeChef, and HackerRank** straight to **GitHub** — neatly organized, securely stored, and always ready when you need them.
+
+*Less busywork. More coding. More wins. ⚡*
 
 **Live Link:** *Coming soon (Chrome Web Store)*
 
 </div>
-
----
-
-# Code More. Manage Less. ⚡
-
-**Your solutions deserve to be saved, not manually organized.**
-
-Focus on solving problems while Aqua takes care of the busywork. Automatically sync your accepted solutions from **LeetCode, GeeksforGeeks, CodeChef, and HackerRank** straight to GitHub — neatly organized, securely stored, and always ready when you need them.
-
-*Less busywork. More coding. More wins. ⚡*
 
 ---
 
