@@ -259,22 +259,33 @@ function App() {
       ) : (
         <>
           <hr />
+          <p className="subtitle" style={{ fontSize: '12px', marginBottom: '10px', lineHeight: 1.5 }}>
+            Auto-sync accepted solutions from
+            <br />
+            <strong>LeetCode · GeeksforGeeks · CodeChef · HackerRank</strong>
+          </p>
+          <div
+            style={{
+              fontSize: '12px',
+              textAlign: 'left',
+              padding: '10px 12px',
+              borderRadius: '10px',
+              background: 'rgba(239, 246, 255, 0.12)',
+              border: '1px solid rgba(148, 163, 184, 0.25)',
+              marginBottom: '14px',
+              lineHeight: 1.6,
+            }}
+          >
+            <div>1. Connect your GitHub account</div>
+            <div>2. Create or pick a repository</div>
+            <div>3. Solve &amp; auto-sync every AC!</div>
+          </div>
           <div className="actions">
             <button
-              onClick={async () => {
-                setError('Complete GitHub authorization in the opened tab…');
-                const r = await msg({ type: 'CONNECT_GITHUB' });
-                if (r.error) setError(r.error);
-                else load();
-              }}
-            >
-              Connect GitHub
-            </button>
-            <button
-              className="secondary"
+              style={{ width: '100%' }}
               onClick={() => chrome.runtime.openOptionsPage()}
             >
-              Settings
+              Get Started — Setup GitHub →
             </button>
           </div>
         </>
