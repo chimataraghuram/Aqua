@@ -345,8 +345,14 @@ function App() {
                     const b = await msg({ type: 'GET_BRANCHES', repository: repo });
                     if (Array.isArray(b)) {
                       const names = b.map((x: any) => x.name);
+                      const nextBranch = names[0] || 'main';
                       setBranches(names);
-                      set('branch', names[0] || 'main');
+                      set('branch', nextBranch);
+                      await msg({
+                        type: 'SAVE_SETTINGS',
+                        settings: { ...s, repository: repo, branch: nextBranch },
+                      });
+                      setNotice(`Selected ${repo} and updated README & platform folders.`);
                     }
                   } else {
                     setBranches([]);
