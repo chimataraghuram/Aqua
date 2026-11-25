@@ -173,9 +173,26 @@ function App() {
 
       {data.auth ? (
         <>
-          <div className="streak-pill">
-            <span className="streak-fire">🔥</span>
-            <span>{streak} Day Streak</span>
+          <div className="streak-box">
+            <svg
+              className="streak-svg"
+              width="52"
+              height="58"
+              viewBox="0 0 64 72"
+              fill="none"
+            >
+              <ellipse cx="32" cy="64" rx="18" ry="5" fill="rgba(245, 158, 11, 0.28)" />
+              <path
+                d="M34 4C34 4 49 18 49 36C49 48.5 41.5 58 32 58C22.5 58 15 48.5 15 36C15 26 20 18 20 18C20 18 22 25 26 26C25 16 34 4 34 4Z"
+                fill="#f59e0b"
+              />
+              <path
+                d="M33 28C33 28 40 35 40 43C40 48.5 36.5 53 32 53C27.5 53 24 48.5 24 43C24 37 28.5 31 33 28Z"
+                fill="#fde047"
+              />
+            </svg>
+            <div className="streak-num">{streak}</div>
+            <div className="streak-label">day streak</div>
           </div>
 
           <div>
