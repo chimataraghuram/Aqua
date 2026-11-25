@@ -13,6 +13,16 @@
 
 ---
 
+# Code More. Manage Less. ⚡
+
+**Your solutions deserve to be saved, not manually organized.**
+
+Focus on solving problems while Aqua takes care of the busywork. Automatically sync your accepted solutions from **LeetCode, GeeksforGeeks, CodeChef, and HackerRank** straight to GitHub — neatly organized, securely stored, and always ready when you need them.
+
+*Less busywork. More coding. More wins. ⚡*
+
+---
+
 ## Features
 
 - **All-in-One Multi-Platform Sync**: Automatically detects accepted submissions on **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**—toggle any or all platforms in Settings.
