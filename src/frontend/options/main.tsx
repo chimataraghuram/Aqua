@@ -204,6 +204,7 @@ function App() {
           <div className="actions">
             <button
               type="button"
+              className="btn-full"
               onClick={async () => {
                 setError('');
                 setNotice('');
@@ -220,23 +221,6 @@ function App() {
               }}
             >
               Connect with Token
-            </button>
-            <button
-              type="button"
-              className="secondary"
-              onClick={async () => {
-                setError('');
-                setNotice('');
-                if (!s.repository) {
-                  setError('Select or create a repository first.');
-                  return;
-                }
-                const b = await msg({ type: 'GET_BRANCHES', repository: s.repository });
-                if (b?.error) setError(b.error);
-                else setNotice(`Connection OK: ${s.repository} (${s.branch || 'main'}).`);
-              }}
-            >
-              Test connection
             </button>
           </div>
           <label>
