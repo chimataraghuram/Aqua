@@ -204,6 +204,7 @@ function App() {
           <div className="actions">
             <button
               type="button"
+              className="btn-full"
               onClick={async () => {
                 setError('');
                 setNotice('');
@@ -220,23 +221,6 @@ function App() {
               }}
             >
               Connect with Token
-            </button>
-            <button
-              type="button"
-              className="secondary"
-              onClick={async () => {
-                setError('');
-                setNotice('');
-                if (!s.repository) {
-                  setError('Select or create a repository first.');
-                  return;
-                }
-                const b = await msg({ type: 'GET_BRANCHES', repository: s.repository });
-                if (b?.error) setError(b.error);
-                else setNotice(`Connection OK: ${s.repository} (${s.branch || 'main'}).`);
-              }}
-            >
-              Test connection
             </button>
           </div>
           <label>
@@ -502,10 +486,11 @@ function App() {
             {s.rootFolder && <span className="badge-ok">✓ Done</span>}
           </div>
           <label>
-            Root folder
+            Root folder (optional)
             <input
               value={s.rootFolder}
               onChange={(e) => set('rootFolder', e.target.value)}
+              placeholder="Repository root (default) — or enter subfolder"
             />
           </label>
           <div
@@ -556,10 +541,10 @@ function App() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <img src="/icon.svg" alt="TechBoy" width={28} height={28} />
           <div>
-            <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '13px' }}>
+            <div style={{ fontWeight: 700, fontSize: '13px' }}>
               Developed by TechBoy
             </div>
-            <div style={{ fontSize: '11px', color: '#64748b' }}>
+            <div className="subtitle" style={{ fontSize: '11px' }}>
               Build. Learn. Grow.
             </div>
           </div>
@@ -596,7 +581,7 @@ function App() {
         </div>
 
         <div>
-          <div style={{ color: '#0f172a', fontWeight: 700, fontSize: '12px' }}>
+          <div style={{ fontWeight: 700, fontSize: '12px' }}>
             Contact Me
           </div>
           <a
@@ -614,7 +599,7 @@ function App() {
             target="_blank"
             rel="noreferrer"
             title="GitHub"
-            style={{ color: '#0f172a' }}
+            style={{ color: 'inherit' }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
