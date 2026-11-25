@@ -50,7 +50,7 @@ export interface Auth {
 
 export const defaults: Settings = {
   githubClientId: '',
-  rootFolder: 'Coding-Solutions',
+  rootFolder: '',
   platformFolders: true,
   enabledPlatforms: {
     leetcode: true,

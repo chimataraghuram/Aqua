@@ -525,7 +525,7 @@ function App() {
             <div>✓ Problem ID included in folder name</div>
             <div>✓ Auto-generated README.md per problem</div>
             <div style={{ marginTop: '6px', color: '#475569', fontFamily: 'monospace' }}>
-              {s.rootFolder || 'Coding-Solutions'}/LeetCode/0001-two-sum/solution.py
+              {s.rootFolder ? `${s.rootFolder}/` : ''}LeetCode/0001-two-sum/solution.py
             </div>
           </div>
           <label>
