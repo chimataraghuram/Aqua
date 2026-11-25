@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import './style.css';
-import type { SyncRecord } from '../shared/types';
+import type { SyncRecord } from '../../shared/types';
 import { useEffect, useState } from 'react';
 
 const msg = (x: unknown) =>

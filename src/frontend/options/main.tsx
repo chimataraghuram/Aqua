@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import '../popup/style.css';
-import type { Platform, Settings } from '../shared/types';
+import type { Platform, Settings } from '../../shared/types';
 import { useEffect, useState } from 'react';
 
 const msg = (x: unknown) =>
