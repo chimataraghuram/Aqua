@@ -127,6 +127,7 @@ export const repoReadme = (
   <a href="https://www.codechef.com/"><img src="https://img.shields.io/badge/CODECHEF-5B4638?style=for-the-badge&logo=codechef&logoColor=white" alt="CodeChef" /></a>
   <a href="https://www.hackerrank.com/"><img src="https://img.shields.io/badge/HACKERRANK-00EA64?style=for-the-badge&logo=hackerrank&logoColor=black" alt="HackerRank" /></a>
   <a href="https://github.com/${login}"><img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+  <a href="https://github.com/chimataraghuram/Aqua"><img src="https://img.shields.io/badge/AQUA-0284C7?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Aqua" /></a>
 </p>
 
 <p>
