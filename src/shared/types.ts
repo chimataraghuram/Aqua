@@ -18,6 +18,7 @@ export interface Settings {
   notifySuccess: boolean;
   notifyFailure: boolean;
   debug: boolean;
+  darkMode?: boolean;
 }
 
 export interface Submission {

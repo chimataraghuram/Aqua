@@ -28,6 +28,7 @@ function App() {
   useEffect(() => {
     msg({ type: 'GET_STATE' }).then(async (d) => {
       setS(d.settings);
+      document.body.classList.toggle('dark', Boolean(d.settings?.darkMode));
       if (d.auth) {
         setAuthLogin(d.auth.login || '');
         const list = await msg({ type: 'GET_REPOS' });
@@ -97,20 +98,44 @@ function App() {
           <span style={{ color: '#cbd5e1' }}>|</span>
           <p className="subtitle">by TechBoy · Solve. Flow. Sync.</p>
         </div>
-        <button
-          type="button"
-          className="logout-btn"
-          onClick={async () => {
-            setError('');
-            await msg({ type: 'DISCONNECT_GITHUB' });
-            setAuthLogin('');
-            setRepos([]);
-            setBranches([]);
-            setNotice('Logged out from GitHub.');
+        <div
+          style={{
+            position: 'absolute',
+            right: '16px',
+            display: 'flex',
+            gap: '8px',
+            alignItems: 'center',
           }}
         >
-          Logout
-        </button>
+          <button
+            type="button"
+            className="secondary"
+            onClick={async () => {
+              const next = !s.darkMode;
+              const updated = { ...s, darkMode: next };
+              setS(updated);
+              document.body.classList.toggle('dark', next);
+              await msg({ type: 'SAVE_SETTINGS', settings: updated });
+            }}
+          >
+            {s.darkMode ? '☀️ Light' : '🌙 Dark'}
+          </button>
+          <button
+            type="button"
+            className="logout-btn"
+            style={{ position: 'static' }}
+            onClick={async () => {
+              setError('');
+              await msg({ type: 'DISCONNECT_GITHUB' });
+              setAuthLogin('');
+              setRepos([]);
+              setBranches([]);
+              setNotice('Logged out from GitHub.');
+            }}
+          >
+            Logout
+          </button>
+        </div>
       </header>
 
       <div className="stepper" style={{ marginBottom: '22px' }}>
