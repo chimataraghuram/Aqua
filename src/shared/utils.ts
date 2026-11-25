@@ -119,7 +119,7 @@ export const repoReadme = (
 
 ---
 
-**Maintained by [@${login}](https://github.com/${login}) · Managed by [Aqua](https://github.com/chimataraghuram/Aqua)**
+<img src="https://raw.githubusercontent.com/chimataraghuram/Aqua/main/public/icon.svg" alt="Aqua" width="22" height="22" /> **Maintained by [Aqua](https://github.com/chimataraghuram/Aqua)**
 
 <p>
   <a href="https://leetcode.com/"><img src="https://img.shields.io/badge/LEETCODE-FFA116?style=for-the-badge&logo=leetcode&logoColor=white" alt="LeetCode" /></a>
