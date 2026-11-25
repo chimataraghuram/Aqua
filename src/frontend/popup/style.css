@@ -324,3 +324,47 @@ select {
   font-size: 13px;
   font-weight: 600;
 }
+
+body.dark {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e1b4b 100%);
+  color: #f1f5f9;
+}
+
+body.dark .options-topbar,
+body.dark .card,
+body.dark .dev-footer {
+  background: rgba(15, 23, 42, 0.78);
+  border-color: rgba(148, 163, 184, 0.22);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+body.dark .card h2,
+body.dark .step strong,
+body.dark .diff-row span,
+body.dark label {
+  color: #f1f5f9;
+}
+
+body.dark .subtitle,
+body.dark .step small {
+  color: #94a3b8;
+}
+
+body.dark input:not([type='checkbox']),
+body.dark select {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: #f8fafc;
+}
+
+body.dark button.secondary {
+  background: rgba(30, 41, 59, 0.9);
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+body.dark button.logout-btn {
+  background: rgba(127, 29, 29, 0.35);
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.3);
+}

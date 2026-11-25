@@ -8,7 +8,7 @@
 
 Focus on solving problems while Aqua takes care of the busywork. Automatically sync your accepted solutions from **LeetCode, GeeksforGeeks, CodeChef, and HackerRank** straight to **GitHub** — neatly organized, securely stored, and always ready when you need them.
 
-*Less busywork. More coding. More wins. ⚡*
+*Less manual work & Time managing code. More time building, coding & solving ⚡.*
 
 **Live Link:** *Coming soon (Chrome Web Store)*
 

@@ -27,7 +27,11 @@ function App() {
   const [data, setData] = useState<any>();
   const [onCodingSite, setOnCodingSite] = useState<boolean>(true);
   const [error, setError] = useState('');
-  const load = () => msg({ type: 'GET_STATE' }).then(setData);
+  const load = () =>
+    msg({ type: 'GET_STATE' }).then((d) => {
+      document.body.classList.toggle('dark', Boolean(d?.settings?.darkMode));
+      setData(d);
+    });
 
   useEffect(() => {
     load();
