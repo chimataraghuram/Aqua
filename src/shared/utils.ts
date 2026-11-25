@@ -146,6 +146,21 @@ ${rows || '| - | No problems synced yet | - | - | - | - |'}
 
 </details>
 
+<details>
+<summary>🏷️ Click to browse problems by Platform</summary>
+
+${(['leetcode', 'geeksforgeeks', 'codechef', 'hackerrank'] as Platform[])
+  .map((plat) => {
+    const items = list.filter((r) => (r.submission.platform || 'leetcode') === plat);
+    const links = items
+      .map((r) => `- [${r.submission.title}](${r.submission.url}) (${r.submission.language})`)
+      .join('\n');
+    return `### ${platformLabel(plat)} (${items.length})\n${links || '- *No problems synced yet*'}`;
+  })
+  .join('\n\n')}
+
+</details>
+
 ---
 
 *Auto-synced via **Aqua** by TechBoy (CHIMATA RAGHURAM) · \`${repo}\`*
