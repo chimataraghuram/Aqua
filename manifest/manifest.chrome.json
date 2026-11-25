@@ -1,1 +1,48 @@
-{"manifest_version":3,"name":"Aqua by TechBoy","version":"1.0.0","description":"Solve. Flow. Sync. Sync accepted LeetCode solutions to GitHub.","action":{"default_popup":"popup.html"},"options_page":"options.html","background":{"service_worker":"background.js","type":"module"},"content_scripts":[{"matches":["https://leetcode.com/problems/*"],"js":["content.js"],"run_at":"document_idle"}],"permissions":["storage","notifications"],"host_permissions":["https://leetcode.com/*","https://api.github.com/*","https://github.com/*"],"icons":{"16":"icon.svg","48":"icon.svg","128":"icon.svg"}}
+{
+  "manifest_version": 3,
+  "name": "Aqua by TechBoy",
+  "version": "1.0.0",
+  "description": "Solve. Flow. Sync. Sync accepted LeetCode, GeeksforGeeks, CodeChef, and HackerRank solutions to GitHub.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/problems/*",
+        "https://www.geeksforgeeks.org/problems/*",
+        "https://practice.geeksforgeeks.org/problems/*",
+        "https://www.codechef.com/problems/*",
+        "https://www.codechef.com/*/problems/*",
+        "https://www.hackerrank.com/challenges/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://www.geeksforgeeks.org/*",
+    "https://practice.geeksforgeeks.org/*",
+    "https://www.codechef.com/*",
+    "https://www.hackerrank.com/*",
+    "https://api.github.com/*",
+    "https://github.com/*"
+  ],
+  "icons": {
+    "16": "icon.svg",
+    "48": "icon.svg",
+    "128": "icon.svg"
+  }
+}
