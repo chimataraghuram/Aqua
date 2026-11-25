@@ -69,257 +69,279 @@ function App() {
     }
     setRepos([created, ...repos]);
     setBranches([created.default_branch || 'main']);
-    setS({
-      ...s,
-      repository: created.full_name,
-      branch: created.default_branch,
-    });
+    setS((prev) =>
+      prev
+        ? {
+            ...prev,
+            repository: created.full_name,
+            branch: created.default_branch,
+          }
+        : prev
+    );
     setNewRepoName('');
     setNotice(`Created and selected ${created.full_name}.`);
   };
 
   return (
     <main className="options">
-      <header>
-        <b>AQUA</b>
-        <small>by TechBoy</small>
-      </header>
-
-      <h2>GitHub</h2>
-      <label>
-        Personal Access Token (quick connect)
-        <input
-          type="password"
-          value={pat}
-          onChange={(e) => setPat(e.target.value)}
-          placeholder="ghp_... (repo scope)"
-        />
-      </label>
-      <button
-        type="button"
-        onClick={async () => {
-          setError('');
-          setNotice('');
-          const res = await msg({ type: 'CONNECT_PAT', token: pat });
-          if (res?.error) {
-            setError(res.error);
-            return;
-          }
-          setPat('');
-          const list = await msg({ type: 'GET_REPOS' });
-          if (Array.isArray(list)) setRepos(list);
-          setNotice(`Connected as ${res.auth.login}.`);
-        }}
-      >
-        Connect with Token
-      </button>
-
-      <button
-        type="button"
-        className="secondary"
-        onClick={async () => {
-          setError('');
-          setNotice('');
-          if (!s.repository) {
-            setError('Select or create a repository first.');
-            return;
-          }
-          const b = await msg({ type: 'GET_BRANCHES', repository: s.repository });
-          if (b?.error) setError(b.error);
-          else setNotice(`Connection OK: ${s.repository} (${s.branch || 'main'}).`);
-        }}
-      >
-        Test connection
-      </button>
-      <button
-        type="button"
-        className="secondary"
-        onClick={async () => {
-          setError('');
-          await msg({ type: 'DISCONNECT_GITHUB' });
-          setRepos([]);
-          setBranches([]);
-          setNotice('Disconnected from GitHub.');
-        }}
-      >
-        Disconnect GitHub
-      </button>
-
-      <label>
-        OAuth client ID (optional, for Device Flow)
-        <input
-          value={s.githubClientId}
-          onChange={(e) => set('githubClientId', e.target.value)}
-          placeholder="GitHub OAuth client ID"
-        />
-      </label>
-
-      <label>
-        Create a new repository
-        <input
-          value={newRepoName}
-          onChange={(e) => setNewRepoName(e.target.value)}
-          placeholder="e.g. dsa-solutions"
-        />
-      </label>
-      <label>
-        Visibility
-        <select
-          value={newRepoPrivate ? 'private' : 'public'}
-          onChange={(e) => setNewRepoPrivate(e.target.value === 'private')}
-        >
-          <option value="private">Private</option>
-          <option value="public">Public</option>
-        </select>
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={newRepoReadme}
-          onChange={(e) => setNewRepoReadme(e.target.checked)}
-        />{' '}
-        Add README automatically
-      </label>
-      <button type="button" onClick={handleCreateRepo}>
-        Create &amp; select repository
-      </button>
-
-      <label>
-        Or use existing repository
-        <select
-          value={s.repository || ''}
-          onChange={async (e) => {
-            const repo = e.target.value;
-            set('repository', repo);
-            if (repo) {
-              const b = await msg({ type: 'GET_BRANCHES', repository: repo });
-              if (Array.isArray(b)) {
-                const names = b.map((x: any) => x.name);
-                setBranches(names);
-                set('branch', names[0] || 'main');
-              }
-            } else {
-              setBranches([]);
-            }
+      <header className="options-topbar">
+        <div className="options-brand">
+          <h1 className="brand">
+            Aqua<span>Hub</span>
+          </h1>
+          <p className="subtitle">
+            by TechBoy · Solve. Flow. Sync. across LeetCode, GeeksforGeeks, CodeChef &amp; HackerRank
+          </p>
+        </div>
+        <button
+          type="button"
+          className="logout-btn"
+          onClick={async () => {
+            setError('');
+            await msg({ type: 'DISCONNECT_GITHUB' });
+            setRepos([]);
+            setBranches([]);
+            setNotice('Logged out from GitHub.');
           }}
         >
-          <option value="">Select repository</option>
-          {repos.map((r) => (
-            <option key={r.full_name} value={r.full_name}>
-              {r.full_name} ({r.private ? 'private' : 'public'})
-            </option>
+          Logout
+        </button>
+      </header>
+
+      <div className="options-grid">
+        <section className="card">
+          <h2>GitHub Connection</h2>
+          <label>
+            Personal Access Token (quick connect)
+            <input
+              type="password"
+              value={pat}
+              onChange={(e) => setPat(e.target.value)}
+              placeholder="ghp_... (repo scope)"
+            />
+          </label>
+          <div className="actions">
+            <button
+              type="button"
+              onClick={async () => {
+                setError('');
+                setNotice('');
+                const res = await msg({ type: 'CONNECT_PAT', token: pat });
+                if (res?.error) {
+                  setError(res.error);
+                  return;
+                }
+                setPat('');
+                const list = await msg({ type: 'GET_REPOS' });
+                if (Array.isArray(list)) setRepos(list);
+                setNotice(`Connected as ${res.auth.login}.`);
+              }}
+            >
+              Connect with Token
+            </button>
+            <button
+              type="button"
+              className="secondary"
+              onClick={async () => {
+                setError('');
+                setNotice('');
+                if (!s.repository) {
+                  setError('Select or create a repository first.');
+                  return;
+                }
+                const b = await msg({ type: 'GET_BRANCHES', repository: s.repository });
+                if (b?.error) setError(b.error);
+                else setNotice(`Connection OK: ${s.repository} (${s.branch || 'main'}).`);
+              }}
+            >
+              Test connection
+            </button>
+          </div>
+          <label>
+            OAuth client ID (optional, for Device Flow)
+            <input
+              value={s.githubClientId}
+              onChange={(e) => set('githubClientId', e.target.value)}
+              placeholder="GitHub OAuth client ID"
+            />
+          </label>
+        </section>
+
+        <section className="card">
+          <h2>Repository</h2>
+          <label>
+            Create a new repository
+            <input
+              value={newRepoName}
+              onChange={(e) => setNewRepoName(e.target.value)}
+              placeholder="e.g. dsa-solutions"
+            />
+          </label>
+          <label>
+            Visibility
+            <select
+              value={newRepoPrivate ? 'private' : 'public'}
+              onChange={(e) => setNewRepoPrivate(e.target.value === 'private')}
+            >
+              <option value="private">Private</option>
+              <option value="public">Public</option>
+            </select>
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={newRepoReadme}
+              onChange={(e) => setNewRepoReadme(e.target.checked)}
+            />{' '}
+            Add README automatically
+          </label>
+          <button type="button" onClick={handleCreateRepo}>
+            Create &amp; select repository
+          </button>
+
+          <label>
+            Or use existing repository
+            <select
+              value={s.repository || ''}
+              onChange={async (e) => {
+                const repo = e.target.value;
+                set('repository', repo);
+                if (repo) {
+                  const b = await msg({ type: 'GET_BRANCHES', repository: repo });
+                  if (Array.isArray(b)) {
+                    const names = b.map((x: any) => x.name);
+                    setBranches(names);
+                    set('branch', names[0] || 'main');
+                  }
+                } else {
+                  setBranches([]);
+                }
+              }}
+            >
+              <option value="">Select repository</option>
+              {repos.map((r) => (
+                <option key={r.full_name} value={r.full_name}>
+                  {r.full_name} ({r.private ? 'private' : 'public'})
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Branch
+            {branches.length > 0 ? (
+              <select
+                value={s.branch || ''}
+                onChange={(e) => set('branch', e.target.value)}
+              >
+                {branches.map((b) => (
+                  <option key={b} value={b}>
+                    {b}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                value={s.branch || ''}
+                onChange={(e) => set('branch', e.target.value)}
+                placeholder="main"
+              />
+            )}
+          </label>
+        </section>
+
+        <section className="card">
+          <h2>Platforms &amp; Sync</h2>
+          {PLATFORMS.map((p) => (
+            <label key={p.id}>
+              <input
+                type="checkbox"
+                checked={s.enabledPlatforms?.[p.id] ?? true}
+                onChange={(e) => togglePlatform(p.id, e.target.checked)}
+              />{' '}
+              {p.label}
+            </label>
           ))}
-        </select>
-      </label>
+          <hr />
+          <label>
+            <input
+              type="checkbox"
+              checked={s.autoSync}
+              onChange={(e) => set('autoSync', e.target.checked)}
+            />{' '}
+            Automatically sync accepted submissions
+          </label>
+          <label>
+            Duplicate behavior
+            <select
+              value={s.duplicateBehavior}
+              onChange={(e) =>
+                set('duplicateBehavior', e.target.value as Settings['duplicateBehavior'])
+              }
+            >
+              <option value="update">Update existing</option>
+              <option value="skip">Skip</option>
+              <option value="ask">Ask before updating</option>
+            </select>
+          </label>
+        </section>
 
-      <label>
-        Branch
-        {branches.length > 0 ? (
-          <select
-            value={s.branch || ''}
-            onChange={(e) => set('branch', e.target.value)}
-          >
-            {branches.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-        ) : (
-          <input
-            value={s.branch || ''}
-            onChange={(e) => set('branch', e.target.value)}
-            placeholder="main"
-          />
-        )}
-      </label>
+        <section className="card">
+          <h2>File Organization</h2>
+          <label>
+            Root folder
+            <input
+              value={s.rootFolder}
+              onChange={(e) => set('rootFolder', e.target.value)}
+            />
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={s.platformFolders}
+              onChange={(e) => set('platformFolders', e.target.checked)}
+            />{' '}
+            Organize by platform folder
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={s.includeId}
+              onChange={(e) => set('includeId', e.target.checked)}
+            />{' '}
+            Include problem ID
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={s.includeReadme}
+              onChange={(e) => set('includeReadme', e.target.checked)}
+            />{' '}
+            Generate README
+          </label>
+          <label>
+            Commit template
+            <input
+              value={s.commitTemplate}
+              onChange={(e) => set('commitTemplate', e.target.value)}
+            />
+          </label>
+        </section>
+      </div>
 
-      <h2>Platforms</h2>
-      {PLATFORMS.map((p) => (
-        <label key={p.id}>
-          <input
-            type="checkbox"
-            checked={s.enabledPlatforms?.[p.id] ?? true}
-            onChange={(e) => togglePlatform(p.id, e.target.checked)}
-          />{' '}
-          {p.label}
-        </label>
-      ))}
-
-      <h2>Sync</h2>
-      <label>
-        <input
-          type="checkbox"
-          checked={s.autoSync}
-          onChange={(e) => set('autoSync', e.target.checked)}
-        />{' '}
-        Automatically sync accepted submissions
-      </label>
-      <label>
-        Duplicate behavior
-        <select
-          value={s.duplicateBehavior}
-          onChange={(e) =>
-            set('duplicateBehavior', e.target.value as Settings['duplicateBehavior'])
-          }
+      <div className="options-footer">
+        <button
+          onClick={async () => {
+            setError('');
+            await msg({ type: 'SAVE_SETTINGS', settings: s });
+            setNotice('Settings saved.');
+          }}
         >
-          <option value="update">Update existing</option>
-          <option value="skip">Skip</option>
-          <option value="ask">Ask before updating</option>
-        </select>
-      </label>
-
-      <h2>File organization</h2>
-      <label>
-        Root folder
-        <input
-          value={s.rootFolder}
-          onChange={(e) => set('rootFolder', e.target.value)}
-        />
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={s.platformFolders}
-          onChange={(e) => set('platformFolders', e.target.checked)}
-        />{' '}
-        Organize by platform folder
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={s.includeId}
-          onChange={(e) => set('includeId', e.target.checked)}
-        />{' '}
-        Include problem ID
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={s.includeReadme}
-          onChange={(e) => set('includeReadme', e.target.checked)}
-        />{' '}
-        Generate README
-      </label>
-      <label>
-        Commit template
-        <input
-          value={s.commitTemplate}
-          onChange={(e) => set('commitTemplate', e.target.value)}
-        />
-      </label>
-
-      <button
-        onClick={async () => {
-          setError('');
-          await msg({ type: 'SAVE_SETTINGS', settings: s });
-          setNotice('Settings saved.');
-        }}
-      >
-        Save settings
-      </button>
-      {notice && <p className="ok">{notice}</p>}
-      {error && <p className="bad">{error}</p>}
+          Save settings
+        </button>
+        {notice && <p className="ok">{notice}</p>}
+        {error && <p className="bad">{error}</p>}
+      </div>
     </main>
   );
 }
