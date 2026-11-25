@@ -111,11 +111,23 @@ export const repoReadme = (
     })
     .join('\n');
 
+  const repoTitle = repo.split('/')[1] || 'Coding Solutions & Algorithms';
+
   return `<div align="center">
 
-# 🧠 Coding Solutions & Algorithms
+# 🧠 ${repoTitle}
 
-**Maintained by [@${login}](https://github.com/${login}) · Auto-Synced by [Aqua](https://github.com/chimataraghuram/Aqua)**
+---
+
+**Maintained by [@${login}](https://github.com/${login}) · Managed by [Aqua](https://github.com/chimataraghuram/Aqua)**
+
+<p>
+  <a href="https://leetcode.com/"><img src="https://img.shields.io/badge/LEETCODE-FFA116?style=for-the-badge&logo=leetcode&logoColor=white" alt="LeetCode" /></a>
+  <a href="https://www.geeksforgeeks.org/"><img src="https://img.shields.io/badge/GEEKSFORGEEKS-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white" alt="GeeksforGeeks" /></a>
+  <a href="https://www.codechef.com/"><img src="https://img.shields.io/badge/CODECHEF-5B4638?style=for-the-badge&logo=codechef&logoColor=white" alt="CodeChef" /></a>
+  <a href="https://www.hackerrank.com/"><img src="https://img.shields.io/badge/HACKERRANK-00EA64?style=for-the-badge&logo=hackerrank&logoColor=black" alt="HackerRank" /></a>
+  <a href="https://github.com/${login}"><img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+</p>
 
 <p>
   <img src="https://img.shields.io/badge/Total%20Solved-${total}-0284c7?style=flat-square" alt="Total Solved" />
