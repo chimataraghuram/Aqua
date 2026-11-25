@@ -259,16 +259,11 @@ function App() {
       ) : (
         <>
           <hr />
-          <p className="subtitle" style={{ fontSize: '12px', fontWeight: 600, marginBottom: '8px' }}>
-            Solve. Flow. Sync. · Your solutions deserve to be saved, not manually organized.
+          <p className="subtitle" style={{ fontSize: '12px', fontWeight: 600, marginBottom: '6px' }}>
+            Solve. Flow. Sync.
           </p>
-          <p className="subtitle" style={{ fontSize: '11.5px', lineHeight: 1.5, marginBottom: '10px' }}>
-            Focus on solving problems while Aqua takes care of the busywork. Automatically sync your accepted solutions from{' '}
-            <strong>LeetCode, GeeksforGeeks, CodeChef, and HackerRank</strong> straight to{' '}
-            <strong>GitHub</strong> — neatly organized, securely stored, and always ready when you need them.
-          </p>
-          <p className="subtitle" style={{ fontSize: '11.5px', fontStyle: 'italic', marginBottom: '14px' }}>
-            Less manual work &amp; Time managing code. More time building, coding &amp; solving ⚡.
+          <p className="subtitle" style={{ fontSize: '12px', lineHeight: 1.5, marginBottom: '16px' }}>
+            LeetCode · GeeksforGeeks · CodeChef · HackerRank → GitHub
           </p>
           <div className="actions">
             <button
