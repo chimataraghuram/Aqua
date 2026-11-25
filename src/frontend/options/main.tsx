@@ -48,7 +48,12 @@ function App() {
   if (!s) return <main>Loading…</main>;
 
   const set = <K extends keyof Settings>(k: K, v: Settings[K]) =>
-    setS((prev) => (prev ? { ...prev, [k]: v } : prev));
+    setS((prev) => {
+      if (!prev) return prev;
+      const next = { ...prev, [k]: v };
+      msg({ type: 'SAVE_SETTINGS', settings: next });
+      return next;
+    });
 
   const togglePlatform = (p: Platform, enabled: boolean) =>
     set('enabledPlatforms', { ...s.enabledPlatforms, [p]: enabled });
