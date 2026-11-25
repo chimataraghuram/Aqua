@@ -82,20 +82,66 @@ Contributions to this repository are warmly welcomed. However, **copying, rebran
 *Indian Student Developer · Full-Stack Developer & AI Enthusiast*  
 *Secure extension — a student never wants your data.*
 
-<p>
-  <a href="https://www.linkedin.com/in/chimataraghuram/">
-    <img src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
-  <a href="https://github.com/chimataraghuram">
-    <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-  <a href="mailto:chimataraghuram02a@gmail.com">
-    <img src="https://img.shields.io/badge/CONTACT-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Contact" />
-  </a>
-  <a href="https://github.com/sponsors/chimataraghuram">
-    <img src="https://img.shields.io/badge/SPONSOR-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="Sponsor" />
-  </a>
-</p>
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://www.linkedin.com/in/chimataraghuram/">
+        <img src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+      <br /><br />
+      <strong>💼 Professional Network</strong><br />
+      <sub>Let's connect, share insights &amp; discuss career opportunities</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://chimataraghuram.vercel.app">
+        <img src="https://img.shields.io/badge/PORTFOLIO-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" />
+      </a>
+      <br /><br />
+      <strong>🌐 Interactive Showcase</strong><br />
+      <sub>Explore live project demos, architecture reviews &amp; builds</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="mailto:chimataraghuram02a@gmail.com">
+        <img src="https://img.shields.io/badge/EMAIL-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+      </a>
+      <br /><br />
+      <strong>📧 Direct Inquiries</strong><br />
+      <sub>Fast response for project collaborations, freelancing &amp; roles</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="https://github.com/chimataraghuram">
+        <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+      </a>
+      <br /><br />
+      <strong>🐙 Open Source</strong><br />
+      <sub>Browse repositories, star projects &amp; check latest commits</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://leetcode.com/u/chimataraghuram/">
+        <img src="https://img.shields.io/badge/LEETCODE-FFA116?style=for-the-badge&logo=leetcode&logoColor=white" alt="LeetCode" />
+      </a>
+      <br /><br />
+      <strong>💻 Problem Solving</strong><br />
+      <sub>Algorithmic solutions, data structures &amp; competitive coding</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://github.com/sponsors/chimataraghuram">
+        <img src="https://img.shields.io/badge/SPONSOR-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="Sponsor" />
+      </a>
+      <br /><br />
+      <strong>💖 Support &amp; Fuel</strong><br />
+      <sub>Fuel open-source AI builds, research &amp; developer tools</sub>
+    </td>
+  </tr>
+</table>
+
+<br />
+
+*💡 Click any button above to reach out — I'm always open to discussing new AI projects, agent workflows, and collaborations!*
+
+**Let's build something amazing together! 🚀**
 
 </div>
 
