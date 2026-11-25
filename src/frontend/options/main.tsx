@@ -399,17 +399,46 @@ function App() {
       </div>
 
       <footer className="dev-footer">
-        <span>
-          Developed by <strong>TechBoy (CHIMATA RAGHURAM)</strong> · Build. Learn. Grow.
-        </span>
+        <div>
+          <strong style={{ color: '#0f172a' }}>Developed by TechBoy</strong>
+          <div style={{ fontSize: '12px', color: '#64748b' }}>
+            Build. Learn. Grow. · CHIMATA RAGHURAM
+          </div>
+        </div>
+
         <a
           className="repo-link"
+          style={{ margin: 0 }}
           href="https://github.com/chimataraghuram/Aqua"
           target="_blank"
           rel="noreferrer"
         >
-          GitHub Repository
+          ★ Star on GitHub
         </a>
+
+        <div>
+          <strong style={{ color: '#0f172a', fontSize: '12px' }}>Connect</strong>
+          <div style={{ display: 'flex', gap: '12px', fontSize: '12px' }}>
+            <a
+              className="repo-link"
+              style={{ margin: 0 }}
+              href="https://github.com/chimataraghuram"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              className="repo-link"
+              style={{ margin: 0 }}
+              href="https://www.linkedin.com/in/chimataraghuram"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
       </footer>
     </main>
   );
