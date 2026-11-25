@@ -26,16 +26,22 @@ main.options {
 }
 
 .options-topbar {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
+  justify-content: center;
+  padding: 14px 20px;
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
   margin-bottom: 18px;
+}
+
+.options-topbar .logout-btn {
+  position: absolute;
+  right: 16px;
 }
 
 .topbar-left {

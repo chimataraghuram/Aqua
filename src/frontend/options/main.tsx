@@ -108,7 +108,7 @@ function App() {
         </button>
       </header>
 
-      <div className="stepper">
+      <div className="stepper" style={{ marginBottom: '22px' }}>
         <div className="step">
           <span className="step-num">1</span>
           <div>
@@ -140,13 +140,6 @@ function App() {
             <small>You&apos;re all set!</small>
           </div>
         </div>
-      </div>
-
-      <div className="hero-title">
-        <h1 className="brand">
-          Aqua<span>Hub</span>
-        </h1>
-        <p className="subtitle">Connect · Manage · Build</p>
       </div>
 
       <div className="options-grid">
