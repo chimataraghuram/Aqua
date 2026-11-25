@@ -163,6 +163,18 @@ ${(['leetcode', 'geeksforgeeks', 'codechef', 'hackerrank'] as Platform[])
 
 ---
 
-*Auto-synced via **Aqua** by TechBoy (CHIMATA RAGHURAM) · \`${repo}\`*
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/chimataraghuram/Aqua/main/public/icon.svg" alt="Aqua" width="32" height="32" />
+
+### ⚡ Managed & Auto-Synced by [Aqua](https://github.com/chimataraghuram/Aqua)
+
+*Code More. Manage Less. · Solve. Flow. Sync.*
+
+Built by **TechBoy (CHIMATA RAGHURAM)** · [GitHub](https://github.com/chimataraghuram) · [LinkedIn](https://www.linkedin.com/in/chimataraghuram/) · [Aqua Extension](https://github.com/chimataraghuram/Aqua)
+
+<sub>Synced repository: \`${repo}\`</sub>
+
+</div>
 `;
 };
