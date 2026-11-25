@@ -15,8 +15,10 @@ const PLATFORMS: Array<{ id: Platform; label: string; color: string; tag: string
 
 function App() {
   const [s, setS] = useState<Settings>();
+  const [authLogin, setAuthLogin] = useState<string>('');
   const [repos, setRepos] = useState<any[]>([]);
   const [branches, setBranches] = useState<string[]>([]);
+  const [repoSection, setRepoSection] = useState<'create' | 'existing' | 'both'>('both');
   const [pat, setPat] = useState('');
   const [newRepoName, setNewRepoName] = useState('');
   const [newRepoPrivate, setNewRepoPrivate] = useState(true);
@@ -27,9 +29,11 @@ function App() {
     msg({ type: 'GET_STATE' }).then(async (d) => {
       setS(d.settings);
       if (d.auth) {
+        setAuthLogin(d.auth.login || '');
         const list = await msg({ type: 'GET_REPOS' });
         if (Array.isArray(list)) setRepos(list);
         if (d.settings?.repository) {
+          setRepoSection('existing');
           const b = await msg({
             type: 'GET_BRANCHES',
             repository: d.settings.repository,
@@ -68,6 +72,7 @@ function App() {
     }
     setRepos([created, ...repos]);
     setBranches([created.default_branch || 'main']);
+    setRepoSection('create');
     setS((prev) =>
       prev
         ? {
@@ -98,6 +103,7 @@ function App() {
           onClick={async () => {
             setError('');
             await msg({ type: 'DISCONNECT_GITHUB' });
+            setAuthLogin('');
             setRepos([]);
             setBranches([]);
             setNotice('Logged out from GitHub.');
@@ -150,7 +156,7 @@ function App() {
               </svg>
               GitHub Connection
             </h2>
-            {repos.length > 0 && <span className="badge-ok">● Connected</span>}
+            {authLogin && <span className="badge-ok">✓ Done</span>}
           </div>
           <label>
             Personal Access Token (quick connect)
@@ -173,6 +179,7 @@ function App() {
                   return;
                 }
                 setPat('');
+                setAuthLogin(res.auth.login);
                 const list = await msg({ type: 'GET_REPOS' });
                 if (Array.isArray(list)) setRepos(list);
                 setNotice(`Connected as ${res.auth.login}.`);
@@ -206,18 +213,46 @@ function App() {
               placeholder="GitHub OAuth client ID"
             />
           </label>
+          {authLogin && (
+            <div
+              style={{
+                marginTop: '14px',
+                padding: '10px 14px',
+                borderRadius: '10px',
+                background: 'rgba(220, 252, 231, 0.7)',
+                color: '#15803d',
+                fontSize: '13px',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <span>● Signed in as @{authLogin}</span>
+              <span style={{ fontSize: '12px', fontWeight: 500 }}>Ready to sync</span>
+            </div>
+          )}
         </section>
 
         <section className="card">
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-            </svg>
-            Repository
-          </h2>
+          <div className="card-head">
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              </svg>
+              Repository
+            </h2>
+            {s.repository && <span className="badge-ok">✓ Done</span>}
+          </div>
 
-          <details open>
-            <summary style={{ cursor: 'pointer', fontWeight: 600, margin: '8px 0' }}>
+          <details open={repoSection === 'create' || repoSection === 'both'}>
+            <summary
+              onClick={(e) => {
+                e.preventDefault();
+                setRepoSection(repoSection === 'create' ? 'existing' : 'create');
+              }}
+              style={{ cursor: 'pointer', fontWeight: 600, margin: '8px 0' }}
+            >
               Create a new repository
             </summary>
             <label>
@@ -259,8 +294,14 @@ function App() {
             <hr style={{ flex: 1, margin: 0 }} />
           </div>
 
-          <details open>
-            <summary style={{ cursor: 'pointer', fontWeight: 600, margin: '8px 0' }}>
+          <details open={repoSection === 'existing' || repoSection === 'both'}>
+            <summary
+              onClick={(e) => {
+                e.preventDefault();
+                setRepoSection(repoSection === 'existing' ? 'create' : 'existing');
+              }}
+              style={{ cursor: 'pointer', fontWeight: 600, margin: '8px 0' }}
+            >
               Use existing repository
             </summary>
             <label>
@@ -271,6 +312,7 @@ function App() {
                   const repo = e.target.value;
                   set('repository', repo);
                   if (repo) {
+                    setRepoSection('existing');
                     const b = await msg({ type: 'GET_BRANCHES', repository: repo });
                     if (Array.isArray(b)) {
                       const names = b.map((x: any) => x.name);
@@ -316,13 +358,18 @@ function App() {
         </section>
 
         <section className="card">
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
-              <path d="M23 4v6h-6M1 20v-6h6" />
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
-            </svg>
-            Platforms &amp; Sync
-          </h2>
+          <div className="card-head">
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
+                <path d="M23 4v6h-6M1 20v-6h6" />
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+              </svg>
+              Platforms &amp; Sync
+            </h2>
+            {PLATFORMS.some((p) => s.enabledPlatforms?.[p.id] ?? true) && (
+              <span className="badge-ok">✓ Done</span>
+            )}
+          </div>
           {PLATFORMS.map((p) => (
             <label
               key={p.id}
@@ -377,12 +424,15 @@ function App() {
         </section>
 
         <section className="card">
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-            </svg>
-            File Organization
-          </h2>
+          <div className="card-head">
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+              </svg>
+              File Organization
+            </h2>
+            {s.rootFolder && <span className="badge-ok">✓ Done</span>}
+          </div>
           <label>
             Root folder
             <input
@@ -390,30 +440,26 @@ function App() {
               onChange={(e) => set('rootFolder', e.target.value)}
             />
           </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={s.platformFolders}
-              onChange={(e) => set('platformFolders', e.target.checked)}
-            />{' '}
-            Organize by platform folder
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={s.includeId}
-              onChange={(e) => set('includeId', e.target.checked)}
-            />{' '}
-            Include problem ID
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={s.includeReadme}
-              onChange={(e) => set('includeReadme', e.target.checked)}
-            />{' '}
-            Generate README
-          </label>
+          <div
+            style={{
+              margin: '12px 0',
+              padding: '10px 12px',
+              borderRadius: '10px',
+              background: 'rgba(239, 246, 255, 0.85)',
+              fontSize: '12px',
+              color: '#1e3a8a',
+            }}
+          >
+            <div style={{ fontWeight: 700, marginBottom: '6px' }}>
+              Handled automatically for you:
+            </div>
+            <div>✓ Organized by platform folder</div>
+            <div>✓ Problem ID included in folder name</div>
+            <div>✓ Auto-generated README.md per problem</div>
+            <div style={{ marginTop: '6px', color: '#475569', fontFamily: 'monospace' }}>
+              {s.rootFolder || 'Coding-Solutions'}/LeetCode/0001-two-sum/solution.py
+            </div>
+          </div>
           <label>
             Commit template
             <input
@@ -488,9 +534,9 @@ function App() {
           <a
             className="repo-link"
             style={{ margin: 0, fontSize: '12px' }}
-            href="mailto:chimataraghuram@gmail.com"
+            href="mailto:chimataraghuram02a@gmail.com"
           >
-            chimataraghuram@gmail.com
+            chimataraghuram02a@gmail.com
           </a>
         </div>
 
