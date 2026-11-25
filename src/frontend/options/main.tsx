@@ -406,19 +406,37 @@ function App() {
           </div>
         </div>
 
-        <a
-          className="repo-link"
-          style={{ margin: 0 }}
-          href="https://github.com/chimataraghuram/Aqua"
-          target="_blank"
-          rel="noreferrer"
-        >
-          ★ Star on GitHub
-        </a>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <a
+            className="repo-link"
+            style={{ margin: 0 }}
+            href="https://github.com/chimataraghuram/Aqua"
+            target="_blank"
+            rel="noreferrer"
+          >
+            ★ Star on GitHub
+          </a>
+          <a
+            className="repo-link"
+            style={{ margin: 0 }}
+            href="https://github.com/chimataraghuram/Aqua/pulls"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Contribute
+          </a>
+        </div>
 
         <div>
-          <strong style={{ color: '#0f172a', fontSize: '12px' }}>Connect</strong>
+          <strong style={{ color: '#0f172a', fontSize: '12px' }}>Contact &amp; Links</strong>
           <div style={{ display: 'flex', gap: '12px', fontSize: '12px' }}>
+            <a
+              className="repo-link"
+              style={{ margin: 0 }}
+              href="mailto:chimataraghuram@gmail.com"
+            >
+              Email
+            </a>
             <a
               className="repo-link"
               style={{ margin: 0 }}
