@@ -384,6 +384,28 @@ function App() {
               )}
             </label>
           </details>
+
+          {s.repository && (
+            <div
+              style={{
+                marginTop: '14px',
+                padding: '10px 14px',
+                borderRadius: '10px',
+                background: 'rgba(220, 252, 231, 0.7)',
+                color: '#15803d',
+                fontSize: '13px',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <span>● Active: {s.repository}</span>
+              <span style={{ fontSize: '12px', fontWeight: 500 }}>
+                {s.branch || 'main'}
+              </span>
+            </div>
+          )}
         </section>
 
         <section className="card">
