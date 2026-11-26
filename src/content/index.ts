@@ -13,7 +13,9 @@ const adapters: PlatformAdapter[] = [
 
 const active = adapters.find((adapter) => adapter.isPage());
 if (active) {
-  active.observe((submission) =>
-    chrome.runtime.sendMessage({ type: 'SUBMISSION_ACCEPTED', submission })
-  );
+  active.observe((submission) => {
+    if (chrome?.runtime?.id) {
+      chrome.runtime.sendMessage({ type: 'SUBMISSION_ACCEPTED', submission });
+    }
+  });
 }
