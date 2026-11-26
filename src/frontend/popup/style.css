@@ -38,12 +38,15 @@ body::before {
     radial-gradient(circle at 50% 42%, rgba(14, 165, 233, 0.2) 0, rgba(14, 165, 233, 0) 5px),
     radial-gradient(circle at 90% 85%, rgba(56, 189, 248, 0.25) 0, rgba(56, 189, 248, 0) 6px);
   animation: floatParticles 9s ease-in-out infinite;
+  will-change: transform;
 }
 
 main {
   position: relative;
   z-index: 1;
   width: 320px;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 20px 18px;
   text-align: center;
 }
@@ -72,8 +75,15 @@ main.options {
 }
 
 .options-topbar .logout-btn {
+  position: static;
+}
+
+.topbar-actions {
   position: absolute;
   right: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .topbar-left {
@@ -163,7 +173,7 @@ main.options {
 
 .options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   gap: 20px;
 }
 
@@ -390,11 +400,11 @@ body.dark .auto-box {
 @keyframes fireFlicker {
   0%, 100% {
     transform: scale(1) translateY(0);
-    filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.7));
+    opacity: 0.92;
   }
   50% {
     transform: scale(1.08) translateY(-2px);
-    filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.95));
+    opacity: 1;
   }
 }
 
@@ -408,6 +418,8 @@ body.dark .auto-box {
 .streak-svg {
   animation: fireFlicker 1.15s ease-in-out infinite;
   transform-origin: center bottom;
+  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.75));
+  will-change: transform, opacity;
 }
 
 .streak-num {
@@ -467,4 +479,72 @@ body.dark button.logout-btn {
   background: rgba(127, 29, 29, 0.35);
   color: #fca5a5;
   border-color: rgba(248, 113, 113, 0.3);
+}
+
+@media (max-width: 900px) {
+  main.options {
+    padding: 18px 18px 32px;
+  }
+
+  .options-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  main.options {
+    padding: 14px 12px 28px;
+  }
+
+  .options-topbar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .topbar-left {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .topbar-actions {
+    position: static;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .stepper {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .step-line {
+    display: none;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .dev-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  .streak-svg {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -3,8 +3,37 @@ import './style.css';
 import type { SyncRecord } from '../../shared/types';
 import { useEffect, useState } from 'react';
 
+const hasRuntime =
+  typeof chrome !== 'undefined' && Boolean(chrome?.runtime?.id);
+
+const PREVIEW_STATE = {
+  settings: {
+    repository: 'techboy/coding-solutions',
+    branch: 'main',
+    darkMode: false,
+  },
+  history: [
+    {
+      id: 'preview-1',
+      status: 'success',
+      timestamp: Date.now(),
+      submission: {
+        platform: 'leetcode',
+        title: '1. Two Sum',
+        slug: 'two-sum',
+        difficulty: 'Easy',
+      },
+    },
+  ],
+  pending: [],
+};
+
 const msg = (x: unknown) =>
-  new Promise<any>((r) => chrome.runtime.sendMessage(x, r));
+  hasRuntime
+    ? new Promise<any>((r) => chrome.runtime.sendMessage(x, r))
+    : Promise.resolve(
+        (x as { type?: string })?.type === 'GET_STATE' ? PREVIEW_STATE : { ok: true }
+      );
 
 const CODING_HOSTS = [
   'leetcode.com',
@@ -57,9 +86,13 @@ function App() {
 
   useEffect(() => {
     load();
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      setOnCodingSite(isCodingUrl(tabs[0]?.url));
-    });
+    if (typeof chrome !== 'undefined' && chrome?.tabs?.query) {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        setOnCodingSite(isCodingUrl(tabs[0]?.url));
+      });
+    } else {
+      setOnCodingSite(true);
+    }
   }, []);
 
   if (!data) return <main>Loading Aqua…</main>;
