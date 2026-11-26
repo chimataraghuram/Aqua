@@ -42,6 +42,7 @@ export class LeetCodeAdapter implements PlatformAdapter {
         '[data-difficulty]',
         'div[class*="text-difficulty"]',
       ]),
+      description: queryText(['[data-track-load="description_content"]']),
       language:
         queryText([
           'button[data-e2e-locator="lang-selector-button"]',

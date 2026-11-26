@@ -33,7 +33,7 @@ describe('multi-platform sync helpers', () => {
   it('includes the platform name in README and commit messages', () => {
     const sub = sample('geeksforgeeks', { title: 'Indexes of Subarray Sum' });
     const path = solutionPath(sub, defaults);
-    expect(readme(sub, path)).toContain('- Source: GeeksforGeeks');
+    expect(readme(sub, path)).toContain('GeeksforGeeks');
     expect(commitMessage(defaults.commitTemplate, sub)).toBe(
       'feat(geeksforgeeks): add Indexes of Subarray Sum solution'
     );

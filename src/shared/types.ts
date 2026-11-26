@@ -28,6 +28,7 @@ export interface Submission {
   url: string;
   id?: string;
   difficulty?: string;
+  description?: string;
   language: string;
   code: string;
   timestamp: number;

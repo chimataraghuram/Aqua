@@ -70,7 +70,7 @@ export const solutionPath = (s: Submission, c: Settings) => {
 };
 
 export const readme = (s: Submission, path: string) =>
-  `# ${s.title}\n\n- Problem: ${s.title}\n- Difficulty: ${s.difficulty || 'Unknown'}\n- Language: ${s.language}\n- Source: ${platformLabel(s.platform)}\n- Problem URL: ${s.url}\n\n## Solution\n\nThe solution is available in \`${path.split('/').pop()}\`.\n\n## Complexity\n\nComplexity analysis not automatically determined.\n`;
+  `# [${s.title}](${s.url})\n\n### ${s.difficulty || 'Unknown'} · ${s.language} · ${platformLabel(s.platform)}\n\n${s.description ? `${s.description}\n\n` : ''}## Solution\n\nThe solution is available in [\`${path.split('/').pop()}\`](./${path.split('/').pop()}).\n`;
 
 export const commitMessage = (t: string, s: Submission) =>
   t
