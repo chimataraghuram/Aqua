@@ -35,24 +35,59 @@ function mountAquaPushPill(onManualPush?: () => void) {
   document.body.appendChild(pill);
 }
 
-function setAquaPushState(state: 'syncing' | 'done' | 'idle') {
+function setAquaPushState(
+  state: 'syncing' | 'done' | 'error' | 'idle',
+  message?: string
+) {
+  const pill = document.getElementById('aqua-push-pill');
   const status = document.getElementById('aqua-push-status');
   const label = document.getElementById('aqua-push-label');
-  if (!status || !label) return;
+  if (!pill || !status || !label) return;
+
+  pill.title = message || '';
 
   if (state === 'syncing') {
-    status.innerHTML =
-      '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.25);border-top-color:#38bdf8;border-radius:50%;display:inline-block;animation:aquaSpin 0.8s linear infinite"></span>';
+    const spinner = document.createElement('span');
+    spinner.style.cssText =
+      'width:14px;height:14px;border:2px solid rgba(255,255,255,0.25);border-top-color:#38bdf8;border-radius:50%;display:inline-block;animation:aquaSpin 0.8s linear infinite';
+    status.replaceChildren(spinner);
     label.textContent = 'Syncing…';
   } else if (state === 'done') {
-    status.innerHTML =
-      '<span style="color:#22c55e;font-weight:800;font-size:15px">✓</span>';
+    const check = document.createElement('span');
+    check.style.cssText = 'color:#22c55e;font-weight:800;font-size:15px';
+    check.textContent = '✓';
+    status.replaceChildren(check);
     label.textContent = 'Synced';
     setTimeout(() => setAquaPushState('idle'), 3000);
+  } else if (state === 'error') {
+    const cross = document.createElement('span');
+    cross.style.cssText = 'color:#ef4444;font-weight:800;font-size:15px';
+    cross.textContent = '✕';
+    status.replaceChildren(cross);
+    label.textContent = message || 'Failed';
+    setTimeout(() => setAquaPushState('idle'), 3500);
   } else {
-    status.innerHTML = '';
+    status.replaceChildren();
     label.textContent = 'Push';
   }
+}
+
+function sendToBackground(
+  payload: unknown,
+  onSuccess: () => void,
+  onError: (msg: string) => void
+) {
+  if (!chrome?.runtime?.id) {
+    onError('Reload page');
+    return;
+  }
+  chrome.runtime.sendMessage(payload, (res?: { error?: string }) => {
+    if (chrome.runtime.lastError || res?.error) {
+      onError(res?.error ? 'Sync failed' : 'Reload page');
+      return;
+    }
+    onSuccess();
+  });
 }
 
 const adapters: PlatformAdapter[] = [
@@ -65,17 +100,25 @@ const adapters: PlatformAdapter[] = [
 const active = adapters.find((adapter) => adapter.isPage());
 if (active) {
   mountAquaPushPill(() => {
+    const submission = active.submission();
+    if (!submission) {
+      setAquaPushState('error', 'No accepted code');
+      return;
+    }
     setAquaPushState('syncing');
-    setTimeout(() => setAquaPushState('done'), 1200);
+    sendToBackground(
+      { type: 'SYNC', submission },
+      () => setAquaPushState('done'),
+      (msg) => setAquaPushState('error', msg)
+    );
   });
 
   active.observe((submission) => {
-    if (chrome?.runtime?.id) {
-      setAquaPushState('syncing');
-      chrome.runtime.sendMessage(
-        { type: 'SUBMISSION_ACCEPTED', submission },
-        () => setAquaPushState('done')
-      );
-    }
+    setAquaPushState('syncing');
+    sendToBackground(
+      { type: 'SUBMISSION_ACCEPTED', submission },
+      () => setAquaPushState('done'),
+      (msg) => setAquaPushState('error', msg)
+    );
   });
 }

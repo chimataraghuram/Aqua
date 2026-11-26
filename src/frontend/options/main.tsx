@@ -1,10 +1,19 @@
 import { createRoot } from 'react-dom/client';
 import '../popup/style.css';
-import type { Platform, Settings } from '../../shared/types';
+import { defaults, type Platform, type Settings } from '../../shared/types';
 import { useEffect, useState } from 'react';
 
+const hasRuntime =
+  typeof chrome !== 'undefined' && Boolean(chrome?.runtime?.id);
+
 const msg = (x: unknown) =>
-  new Promise<any>((r) => chrome.runtime.sendMessage(x, r));
+  hasRuntime
+    ? new Promise<any>((r) => chrome.runtime.sendMessage(x, r))
+    : Promise.resolve(
+        (x as { type?: string })?.type === 'GET_STATE'
+          ? { settings: defaults, auth: null }
+          : { ok: true }
+      );
 
 const PLATFORMS: Array<{ id: Platform; label: string; color: string; tag: string }> = [
   { id: 'leetcode', label: 'LeetCode', color: '#f59e0b', tag: 'LC' },
@@ -103,15 +112,7 @@ function App() {
           <span style={{ color: '#cbd5e1' }}>|</span>
           <p className="subtitle">by TechBoy · Solve. Flow. Sync.</p>
         </div>
-        <div
-          style={{
-            position: 'absolute',
-            right: '16px',
-            display: 'flex',
-            gap: '8px',
-            alignItems: 'center',
-          }}
-        >
+        <div className="topbar-actions">
           <button
             type="button"
             className="secondary"

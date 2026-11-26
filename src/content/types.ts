@@ -3,6 +3,7 @@ import type { Platform, Submission } from '../shared/types';
 export interface PlatformAdapter {
   readonly platform: Platform;
   isPage(): boolean;
+  submission(): Submission | null;
   observe(send: (submission: Submission) => void): void;
 }
 
