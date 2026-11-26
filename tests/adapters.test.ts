@@ -17,16 +17,16 @@ const sample = (platform: Platform, overrides: Partial<Submission> = {}): Submis
 describe('multi-platform sync helpers', () => {
   it('builds platform-specific folder paths', () => {
     expect(solutionPath(sample('leetcode', { id: '1' }), defaults)).toBe(
-      'LeetCode/0001-two-sum/solution.cpp'
+      'LeetCode/0001-two-sum/0001-two-sum.cpp'
     );
     expect(solutionPath(sample('geeksforgeeks'), defaults)).toBe(
-      'GeeksforGeeks/two-sum/solution.cpp'
+      'GeeksforGeeks/two-sum/two-sum.cpp'
     );
     expect(solutionPath(sample('codechef', { language: 'Python3' }), defaults)).toBe(
-      'CodeChef/two-sum/solution.py'
+      'CodeChef/two-sum/two-sum.py'
     );
     expect(solutionPath(sample('hackerrank', { language: 'Java' }), defaults)).toBe(
-      'HackerRank/two-sum/solution.java'
+      'HackerRank/two-sum/two-sum.java'
     );
   });
 

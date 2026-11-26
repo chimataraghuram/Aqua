@@ -64,8 +64,9 @@ export const solutionPath = (s: Submission, c: Settings) => {
   if (c.platformFolders) {
     folder = `${platformLabel(s.platform)}/${folder}`;
   }
+  const fileName = folder.split('/').pop() || slugify(s.slug);
   const ext = languageExtensions[s.language.toLowerCase()] || '.txt';
-  return safePath(`${c.rootFolder}/${folder}/solution${ext}`);
+  return safePath(`${c.rootFolder}/${folder}/${fileName}${ext}`);
 };
 
 export const readme = (s: Submission, path: string) =>
