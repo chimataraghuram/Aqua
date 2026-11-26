@@ -37,7 +37,7 @@ export class LeetCodeAdapter implements PlatformAdapter {
       title,
       slug,
       url: location.href.split('?')[0] || location.href,
-      id: (slug.match(/^\d+/) || [])[0],
+      id: (title.match(/^\d+/) || slug.match(/^\d+/) || [])[0],
       difficulty: queryText([
         '[data-difficulty]',
         'div[class*="text-difficulty"]',
