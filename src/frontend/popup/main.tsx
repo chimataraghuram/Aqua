@@ -234,19 +234,6 @@ function App() {
             CC: {countPlat('codechef')} · HR: {countPlat('hackerrank')}
           </p>
 
-          {data.pending.length > 0 && (
-            <div className="actions">
-              {data.pending.map((x: SyncRecord) => (
-                <button
-                  key={x.id}
-                  onClick={() => msg({ type: 'RETRY', id: x.id }).then(load)}
-                >
-                  Retry {x.submission.title}
-                </button>
-              ))}
-            </div>
-          )}
-
           <div className="actions">
             <button
               className="secondary"

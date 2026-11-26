@@ -17,23 +17,23 @@ const sample = (platform: Platform, overrides: Partial<Submission> = {}): Submis
 describe('multi-platform sync helpers', () => {
   it('builds platform-specific folder paths', () => {
     expect(solutionPath(sample('leetcode', { id: '1' }), defaults)).toBe(
-      'LeetCode/0001-two-sum/solution.cpp'
+      'LeetCode/0001-two-sum/0001-two-sum.cpp'
     );
     expect(solutionPath(sample('geeksforgeeks'), defaults)).toBe(
-      'GeeksforGeeks/two-sum/solution.cpp'
+      'GeeksforGeeks/two-sum/two-sum.cpp'
     );
     expect(solutionPath(sample('codechef', { language: 'Python3' }), defaults)).toBe(
-      'CodeChef/two-sum/solution.py'
+      'CodeChef/two-sum/two-sum.py'
     );
     expect(solutionPath(sample('hackerrank', { language: 'Java' }), defaults)).toBe(
-      'HackerRank/two-sum/solution.java'
+      'HackerRank/two-sum/two-sum.java'
     );
   });
 
   it('includes the platform name in README and commit messages', () => {
     const sub = sample('geeksforgeeks', { title: 'Indexes of Subarray Sum' });
     const path = solutionPath(sub, defaults);
-    expect(readme(sub, path)).toContain('- Source: GeeksforGeeks');
+    expect(readme(sub, path)).toContain('GeeksforGeeks');
     expect(commitMessage(defaults.commitTemplate, sub)).toBe(
       'feat(geeksforgeeks): add Indexes of Subarray Sum solution'
     );

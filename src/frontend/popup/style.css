@@ -8,9 +8,41 @@ body {
   background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 45%, #ede9fe 100%);
   color: #0f172a;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-18px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(56, 189, 248, 0.28) 0, rgba(56, 189, 248, 0) 6px),
+    radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.22) 0, rgba(37, 99, 235, 0) 8px),
+    radial-gradient(circle at 28% 78%, rgba(56, 189, 248, 0.24) 0, rgba(56, 189, 248, 0) 7px),
+    radial-gradient(circle at 72% 68%, rgba(99, 102, 241, 0.22) 0, rgba(99, 102, 241, 0) 9px),
+    radial-gradient(circle at 50% 42%, rgba(14, 165, 233, 0.2) 0, rgba(14, 165, 233, 0) 5px),
+    radial-gradient(circle at 90% 85%, rgba(56, 189, 248, 0.25) 0, rgba(56, 189, 248, 0) 6px);
+  animation: floatParticles 9s ease-in-out infinite;
 }
 
 main {
+  position: relative;
+  z-index: 1;
   width: 320px;
   padding: 20px 18px;
   text-align: center;
@@ -257,12 +289,12 @@ button {
   background: linear-gradient(135deg, #2563eb, #0284c7);
   color: #ffffff;
   border: none;
-  border-radius: 999px;
-  padding: 9px 18px;
+  border-radius: 999px !important;
+  padding: 9px 20px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.14s ease;
+  transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.16s ease, opacity 0.16s ease;
 }
 
 button.secondary {
@@ -278,19 +310,19 @@ button.logout-btn {
 }
 
 button:hover {
-  opacity: 0.96;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.24);
+  opacity: 0.97;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.28);
 }
 
 button.secondary:hover,
 button.logout-btn:hover {
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
 }
 
 button:active {
-  transform: translateY(0) scale(0.97);
-  box-shadow: none;
+  transform: translateY(0) scale(0.95);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.18);
 }
 
 label {
@@ -305,12 +337,42 @@ input:not([type='checkbox']),
 select {
   width: 100%;
   margin-top: 5px;
-  padding: 9px 12px;
+  padding: 10px 14px;
   border: 1px solid rgba(148, 163, 184, 0.45);
-  border-radius: 10px;
+  border-radius: 999px;
   font-size: 13px;
   background: rgba(255, 255, 255, 0.85);
   color: #0f172a;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+input:not([type='checkbox']):focus,
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+}
+
+.auto-box {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(239, 246, 255, 0.85);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  font-size: 12px;
+  color: #1e3a8a;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.auto-box:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+}
+
+body.dark .auto-box {
+  background: rgba(30, 58, 138, 0.35);
+  border-color: rgba(96, 165, 250, 0.3);
+  color: #bfdbfe;
 }
 
 .ok {
@@ -364,16 +426,16 @@ select {
 }
 
 body.dark {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e1b4b 100%);
-  color: #f1f5f9;
+  background: linear-gradient(135deg, #030712 0%, #090d16 55%, #0c1224 100%);
+  color: #f8fafc;
 }
 
 body.dark .options-topbar,
 body.dark .card,
 body.dark .dev-footer {
-  background: rgba(15, 23, 42, 0.78);
-  border-color: rgba(148, 163, 184, 0.22);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  background: rgba(10, 15, 28, 0.9);
+  border-color: rgba(148, 163, 184, 0.16);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
 }
 
 body.dark .card h2,
@@ -390,8 +452,8 @@ body.dark .step small {
 
 body.dark input:not([type='checkbox']),
 body.dark select {
-  background: rgba(30, 41, 59, 0.9);
-  border-color: rgba(148, 163, 184, 0.3);
+  background: #070b14;
+  border-color: rgba(148, 163, 184, 0.22);
   color: #f8fafc;
 }
 

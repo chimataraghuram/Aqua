@@ -17,6 +17,8 @@ export class LeetCodeAdapter implements PlatformAdapter {
       '[data-e2e-locator="submission-result"]',
       '[data-cy="submission-result"]',
       '.text-lc-green-s',
+      '.text-green-s',
+      'span[class*="text-green"]',
     ]);
     if (!/accepted/i.test(status)) return null;
 
@@ -35,11 +37,12 @@ export class LeetCodeAdapter implements PlatformAdapter {
       title,
       slug,
       url: location.href.split('?')[0] || location.href,
-      id: (slug.match(/^\d+/) || [])[0],
+      id: (title.match(/^\d+/) || slug.match(/^\d+/) || [])[0],
       difficulty: queryText([
         '[data-difficulty]',
         'div[class*="text-difficulty"]',
       ]),
+      description: queryText(['[data-track-load="description_content"]']),
       language:
         queryText([
           'button[data-e2e-locator="lang-selector-button"]',
@@ -52,14 +55,16 @@ export class LeetCodeAdapter implements PlatformAdapter {
   }
 
   observe(send: (submission: Submission) => void): void {
-    new MutationObserver(() => {
+    const check = () => {
       const submission = this.submission();
       const key = submission ? `${submission.slug}:${submission.code}` : '';
       if (submission && key !== this.last) {
         this.last = key;
         send(submission);
       }
-    }).observe(document.body, {
+    };
+    check();
+    new MutationObserver(check).observe(document.body, {
       childList: true,
       subtree: true,
       characterData: true,
