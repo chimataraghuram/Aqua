@@ -8,9 +8,41 @@ body {
   background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 45%, #ede9fe 100%);
   color: #0f172a;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-18px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(56, 189, 248, 0.28) 0, rgba(56, 189, 248, 0) 6px),
+    radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.22) 0, rgba(37, 99, 235, 0) 8px),
+    radial-gradient(circle at 28% 78%, rgba(56, 189, 248, 0.24) 0, rgba(56, 189, 248, 0) 7px),
+    radial-gradient(circle at 72% 68%, rgba(99, 102, 241, 0.22) 0, rgba(99, 102, 241, 0) 9px),
+    radial-gradient(circle at 50% 42%, rgba(14, 165, 233, 0.2) 0, rgba(14, 165, 233, 0) 5px),
+    radial-gradient(circle at 90% 85%, rgba(56, 189, 248, 0.25) 0, rgba(56, 189, 248, 0) 6px);
+  animation: floatParticles 9s ease-in-out infinite;
 }
 
 main {
+  position: relative;
+  z-index: 1;
   width: 320px;
   padding: 20px 18px;
   text-align: center;
