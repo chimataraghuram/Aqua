@@ -445,16 +445,7 @@ function App() {
               <span>{p.label}</span>
             </label>
           ))}
-          <div
-            style={{
-              margin: '12px 0',
-              padding: '10px 12px',
-              borderRadius: '10px',
-              background: 'rgba(239, 246, 255, 0.85)',
-              fontSize: '12px',
-              color: '#1e3a8a',
-            }}
-          >
+          <div className="auto-box">
             <div style={{ fontWeight: 700, marginBottom: '4px' }}>
               Handled automatically for you:
             </div>
@@ -493,23 +484,14 @@ function App() {
               placeholder="Repository root (default) — or enter subfolder"
             />
           </label>
-          <div
-            style={{
-              margin: '12px 0',
-              padding: '10px 12px',
-              borderRadius: '10px',
-              background: 'rgba(239, 246, 255, 0.85)',
-              fontSize: '12px',
-              color: '#1e3a8a',
-            }}
-          >
+          <div className="auto-box">
             <div style={{ fontWeight: 700, marginBottom: '6px' }}>
               Handled automatically for you:
             </div>
             <div>✓ Organized by platform folder</div>
             <div>✓ Problem ID included in folder name</div>
             <div>✓ Auto-generated README.md per problem</div>
-            <div style={{ marginTop: '6px', color: '#475569', fontFamily: 'monospace' }}>
+            <div style={{ marginTop: '6px', opacity: 0.8, fontFamily: 'monospace' }}>
               {s.rootFolder ? `${s.rootFolder}/` : ''}LeetCode/0001-two-sum/solution.py
             </div>
           </div>
