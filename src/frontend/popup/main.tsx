@@ -114,7 +114,7 @@ function App() {
           }}
         >
           <img
-            src="/icon.svg"
+            src="/icon128.png"
             alt="Aqua"
             width={48}
             height={48}
@@ -191,7 +191,7 @@ function App() {
   return (
     <main>
       <img
-        src="/icon.svg"
+        src="/icon128.png"
         alt="Aqua"
         width={40}
         height={40}
