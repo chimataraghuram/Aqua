@@ -105,7 +105,13 @@ function App() {
     <main className="options">
       <header className="options-topbar">
         <div className="topbar-left">
-          <img src="/icon128.png" alt="Aqua" width={26} height={26} />
+          <img
+            src="/icon128.png"
+            alt="Aqua"
+            width={44}
+            height={44}
+            style={{ borderRadius: '10px', objectFit: 'cover' }}
+          />
           <h1 className="brand">
             <span>Aqua</span>
           </h1>
@@ -522,7 +528,13 @@ function App() {
 
       <footer className="dev-footer">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src="/icon128.png" alt="TechBoy" width={28} height={28} />
+          <img
+            src="/icon128.png"
+            alt="TechBoy"
+            width={40}
+            height={40}
+            style={{ borderRadius: '10px', objectFit: 'cover' }}
+          />
           <div>
             <div style={{ fontWeight: 700, fontSize: '13px' }}>
               Developed by TechBoy

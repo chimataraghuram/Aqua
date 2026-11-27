@@ -116,9 +116,9 @@ function App() {
           <img
             src="/icon128.png"
             alt="Aqua"
-            width={48}
-            height={48}
-            style={{ filter: 'grayscale(100%)', opacity: 0.65 }}
+            width={56}
+            height={56}
+            style={{ borderRadius: '12px', filter: 'grayscale(100%)', opacity: 0.65 }}
           />
           <span
             style={{
