@@ -81,6 +81,20 @@ See [PRIVACY.md](PRIVACY.md) and [SECURITY.md](SECURITY.md) for full details.
 
 ---
 
+## Supported Browsers
+
+| Browser | Status | Notes |
+| :--- | :---: | :--- |
+| **Google Chrome** | ✅ | Native MV3 build |
+| **Microsoft Edge** | ✅ | Native MV3 build |
+| **Brave** | ✅ | Native MV3 build |
+| **Opera** | ✅ | Native MV3 build |
+| **Vivaldi** | ✅ | Native MV3 build |
+| **Mozilla Firefox** | ✅ | Native MV3 build |
+| **Apple Safari** | ✅ | Safari source packaging |
+
+---
+
 ## How It Works
 
 1. **Connect GitHub** — Sign in with a Personal Access Token (`repo` scope) or GitHub OAuth Device Flow.
