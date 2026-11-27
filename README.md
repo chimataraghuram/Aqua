@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/icon.svg" alt="Aqua Logo" width="84" height="84" />
+<img src="public/logo.jpg" alt="Aqua by TechBoy Logo" width="220" />
 
 # Aqua by TechBoy
 
