@@ -12,7 +12,45 @@ Aqua is a privacy-first, all-in-one browser extension that automatically syncs y
 
 **Live Link:** *Coming soon (Chrome Web Store)*
 
+<p>
+  <img src="https://img.shields.io/badge/version-1.0.0-0284c7?style=flat-square" alt="Version 1.0.0" />
+  <img src="https://img.shields.io/badge/browsers-Chrome%20%7C%20Edge%20%7C%20Brave%20%7C%20Firefox%20%7C%20Safari-2563eb?style=flat-square" alt="Supported Browsers" />
+  <img src="https://img.shields.io/badge/platforms-LeetCode%20%7C%20GfG%20%7C%20CodeChef%20%7C%20HackerRank-16a34a?style=flat-square" alt="Supported Platforms" />
+  <img src="https://img.shields.io/badge/license-MIT-64748b?style=flat-square" alt="MIT License" />
+</p>
+
 </div>
+
+---
+
+## How It Works
+
+1. **Connect GitHub** — Sign in with a Personal Access Token (`repo` scope) or GitHub OAuth Device Flow.
+2. **Solve a Problem** — Code as usual on LeetCode, GeeksforGeeks, CodeChef, or HackerRank.
+3. **Auto-Synced** — Aqua detects accepted submissions (or click the floating **Push** pill) and organizes your code into GitHub:
+
+```text
+your-repo/
+├── README.md                  # Auto-updated live stats & problem catalog
+├── LeetCode/
+│   └── 0009-palindrome-number/
+│       ├── 0009-palindrome-number.py
+│       └── README.md          # Problem statement & metadata
+├── GeeksforGeeks/
+├── CodeChef/
+└── HackerRank/
+```
+
+---
+
+## Supported Platforms
+
+| Platform | Auto-Sync | Floating Push Pill | Problem `README.md` |
+| :--- | :---: | :---: | :---: |
+| **LeetCode** | ✅ | ✅ | ✅ |
+| **GeeksforGeeks** | ✅ | ✅ | ✅ |
+| **CodeChef** | ✅ | ✅ | ✅ |
+| **HackerRank** | ✅ | ✅ | ✅ |
 
 ---
 
@@ -133,6 +171,15 @@ Contributions to this repository are warmly welcomed. However, **copying, rebran
 **Let's build something amazing together! 🚀**
 
 </div>
+
+---
+
+## Support & Contributing
+
+If **Aqua** saves you time, please consider giving this repository a **⭐ Star** on GitHub!
+
+- Found a bug or have a feature request? [Open an Issue](https://github.com/chimataraghuram/Aqua/issues)
+- Want to contribute? Fork the repo and submit a [Pull Request](https://github.com/chimataraghuram/Aqua/pulls)
 
 ---
 
