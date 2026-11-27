@@ -23,37 +23,6 @@ Aqua is a privacy-first, all-in-one browser extension that automatically syncs y
 
 ---
 
-## How It Works
-
-1. **Connect GitHub** — Sign in with a Personal Access Token (`repo` scope) or GitHub OAuth Device Flow.
-2. **Solve a Problem** — Code as usual on LeetCode, GeeksforGeeks, CodeChef, or HackerRank.
-3. **Auto-Synced** — Aqua detects accepted submissions (or click the floating **Push** pill) and organizes your code into GitHub:
-
-```text
-your-repo/
-├── README.md                  # Auto-updated live stats & problem catalog
-├── LeetCode/
-│   └── 0009-palindrome-number/
-│       ├── 0009-palindrome-number.py
-│       └── README.md          # Problem statement & metadata
-├── GeeksforGeeks/
-├── CodeChef/
-└── HackerRank/
-```
-
----
-
-## Supported Platforms
-
-| Platform | Auto-Sync | Floating Push Pill | Problem `README.md` |
-| :--- | :---: | :---: | :---: |
-| **LeetCode** | ✅ | ✅ | ✅ |
-| **GeeksforGeeks** | ✅ | ✅ | ✅ |
-| **CodeChef** | ✅ | ✅ | ✅ |
-| **HackerRank** | ✅ | ✅ | ✅ |
-
----
-
 ## Features
 
 - **All-in-One Multi-Platform Sync**: Automatically detects accepted submissions on **LeetCode**, **GeeksforGeeks**, **CodeChef**, and **HackerRank**—toggle any or all platforms in Settings.
@@ -101,10 +70,44 @@ See [PRIVACY.md](PRIVACY.md) and [SECURITY.md](SECURITY.md) for full details.
 
 ---
 
+## Supported Platforms
+
+| Platform | Auto-Sync | Floating Push Pill | Problem `README.md` |
+| :--- | :---: | :---: | :---: |
+| **LeetCode** | ✅ | ✅ | ✅ |
+| **GeeksforGeeks** | ✅ | ✅ | ✅ |
+| **CodeChef** | ✅ | ✅ | ✅ |
+| **HackerRank** | ✅ | ✅ | ✅ |
+
+---
+
+## How It Works
+
+1. **Connect GitHub** — Sign in with a Personal Access Token (`repo` scope) or GitHub OAuth Device Flow.
+2. **Solve a Problem** — Code as usual on LeetCode, GeeksforGeeks, CodeChef, or HackerRank.
+3. **Auto-Synced** — Aqua detects accepted submissions (or click the floating **Push** pill) and organizes your code into GitHub:
+
+```text
+your-repo/
+├── README.md                  # Auto-updated live stats & problem catalog
+├── LeetCode/
+│   └── 0009-palindrome-number/
+│       ├── 0009-palindrome-number.py
+│       └── README.md          # Problem statement & metadata
+├── GeeksforGeeks/
+├── CodeChef/
+└── HackerRank/
+```
+
+---
+
 ## Contributing
 
 **Everyone is welcome to improve this project — let's grow together!**  
-Whether it's fixing a selector, adding a new platform adapter, or improving the UI, feel free to open an issue or submit a Pull Request on [GitHub](https://github.com/chimataraghuram/Aqua/pulls). See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
+If **Aqua** saves you time, please consider giving this repository a **⭐ Star** on GitHub!
+
+- Found a bug or have a feature request? [Open an Issue](https://github.com/chimataraghuram/Aqua/issues)
+- Want to contribute (fixing a selector, adding a new platform adapter, or improving the UI)? Fork the repo and submit a [Pull Request](https://github.com/chimataraghuram/Aqua/pulls) — see [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
 ---
 
@@ -171,15 +174,6 @@ Contributions to this repository are warmly welcomed. However, **copying, rebran
 **Let's build something amazing together! 🚀**
 
 </div>
-
----
-
-## Support & Contributing
-
-If **Aqua** saves you time, please consider giving this repository a **⭐ Star** on GitHub!
-
-- Found a bug or have a feature request? [Open an Issue](https://github.com/chimataraghuram/Aqua/issues)
-- Want to contribute? Fork the repo and submit a [Pull Request](https://github.com/chimataraghuram/Aqua/pulls)
 
 ---
 
